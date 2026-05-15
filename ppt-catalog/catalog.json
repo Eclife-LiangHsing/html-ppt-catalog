@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "bnext-space-intelligence-html-ppt-visual",
+    "name": "李飛飛空間智慧｜圖文版 HTML PPT",
+    "desc": "以圖文視覺方式整理李飛飛空間智慧相關主題，適合作為趨勢介紹與簡報展示版本。",
+    "source": "Jason / OpenClaw 產出之 HTML PPT；公開 GitHub Pages 頁面驗證整理。",
+    "date": "2026-05-15",
+    "category": "AI 趨勢",
+    "url": "https://eclife-lianghsing.github.io/bnext-space-intelligence-html-ppt-visual/",
+    "zip_url": ""
+  },
+  {
+    "slug": "bnext-space-intelligence-html-ppt-text",
+    "name": "李飛飛空間智慧｜文字版 HTML PPT",
+    "desc": "以文字內容為主整理李飛飛空間智慧主題，方便閱讀、轉寫與後續改稿。",
+    "source": "Jason / OpenClaw 產出之 HTML PPT；公開 GitHub Pages 頁面驗證整理。",
+    "date": "2026-05-15",
+    "category": "AI 趨勢",
+    "url": "https://eclife-lianghsing.github.io/bnext-space-intelligence-html-ppt-text/",
+    "zip_url": ""
+  },
+  {
+    "slug": "liangxing-omnichannel-html-ppt",
+    "name": "良興全通路轉型個案｜HTML PPT",
+    "desc": "整理良興全通路轉型個案，包含企業情境、轉型脈絡與可作為簡報交付的 HTML 版本。",
+    "source": "Jason / OpenClaw 產出之 HTML PPT；公開 GitHub Pages 頁面驗證整理。",
+    "date": "2026-05-15",
+    "category": "企業個案",
+    "url": "https://eclife-lianghsing.github.io/liangxing-omnichannel-html-ppt/",
+    "zip_url": ""
+  },
+  {
+    "slug": "liangxing-omnichannel-html-ppt-visual",
+    "name": "良興全通路轉型個案｜圖文版 HTML PPT",
+    "desc": "以更視覺化的方式呈現良興全通路轉型個案，適合對外展示與快速瀏覽。",
+    "source": "Jason / OpenClaw 產出之 HTML PPT；公開 GitHub Pages 頁面驗證整理。",
+    "date": "2026-05-15",
+    "category": "企業個案",
+    "url": "https://eclife-lianghsing.github.io/liangxing-omnichannel-html-ppt-visual/",
+    "zip_url": ""
+  }
+]
