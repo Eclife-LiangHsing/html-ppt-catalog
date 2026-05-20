@@ -1,5 +1,16 @@
 [
   {
+    "slug": "google-io-2026-agentic-gemini-html-ppt-20260520",
+    "name": "Google I/O 2026｜Agentic Gemini Era 圖文版 HTML PPT",
+    "desc": "整理 Google I/O 2026 開發者大會重點，包含 Gemini 3.5、Gemini Omni、Antigravity 2.0、Google AI Studio、Android/Web agent-ready 工具、Search / Workspace / Shopping / XR 代理化，以及對企業與開發團隊的影響與行動建議。",
+    "source": "Google Blog、Google Developers Blog、Android Developers Blog、9to5Google 公開資料 + OpenClaw 繁中分析報告 `reports/google_io_2026_report_for_notebooklm.md`。",
+    "date": "2026-05-20",
+    "category": "AI 趨勢",
+    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/google-io-2026-agentic-gemini-html-ppt-20260520/",
+    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/google-io-2026-agentic-gemini-html-ppt-20260520/google-io-2026-agentic-gemini-html-ppt-20260520.zip",
+    "note": "圖文分析版｜適合快速了解 Google I/O 2026 的 AI agent 平台戰略、開發者工具趨勢與企業導入討論。"
+  },
+  {
     "slug": "ai-national-power-html-ppt-20260517",
     "name": "AI 的下一場戰爭｜從模型走向國力 HTML PPT",
     "desc": "將原始 AI 趨勢圖往下一層深化，整理平台主權、AI 重工業、台灣供應鏈、AI 國安化、企業治理與 90 天落地路線圖，適合作為 AI 趨勢簡報或企業轉型開場。",
