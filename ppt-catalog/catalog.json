@@ -1,5 +1,16 @@
 [
   {
+    "slug": "liangxing-ai-marketing-system-20260525",
+    "name": "良興 AI 行銷內容與活動報告系統｜展示提案版 HTML PPT",
+    "desc": "將 Claude Cowork Plugin 原型升級為良興可交付的 AI 行銷中台展示版，包含商品資料治理、活動報告、歷史企劃參考、SEO/競品分析、內容工廠、導入路線圖與驗收標準。",
+    "source": "Jason 提供 DOCX：Claude Cowork Plugin 建置紀錄；良興購物網商品快取 data/eclife_products_latest.ndjson（10000 筆，更新 2026-05-19）；賈維斯分析整理。",
+    "date": "2026-05-25",
+    "category": "良興 AI 行銷",
+    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-ai-marketing-system-20260525/",
+    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-ai-marketing-system-20260525/liangxing-ai-marketing-system-20260525.zip",
+    "note": "展示提案版｜可作為良興內部討論 AI 行銷內容、活動報告與 SEO 分析模組的第一版樣板。"
+  },
+  {
     "slug": "google-io-2026-agentic-gemini-html-ppt-20260520",
     "name": "Google I/O 2026｜Agentic Gemini Era 圖文版 HTML PPT",
     "desc": "整理 Google I/O 2026 開發者大會重點，包含 Gemini 3.5、Gemini Omni、Antigravity 2.0、Google AI Studio、Android/Web agent-ready 工具、Search / Workspace / Shopping / XR 代理化，以及對企業與開發團隊的影響與行動建議。",
