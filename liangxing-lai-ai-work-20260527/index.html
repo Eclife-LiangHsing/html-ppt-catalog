@@ -36,10 +36,19 @@
 .quoteBox p{font-size:34px;line-height:1.25;margin:0;color:var(--text-1);font-weight:900}
 .mini{font-size:14px;color:var(--text-3)}
 .source-list{font-size:15px;line-height:1.55;color:var(--text-2)}
-@media(max-width:900px){.signal-grid,.steps,.matrix,.map{grid-template-columns:1fr}.rowcard{grid-template-columns:1fr}.signal{min-height:auto}.quoteBox p{font-size:26px}}
+.ppt-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:80;display:flex;align-items:center;gap:8px;padding:8px;border:1px solid color-mix(in srgb,var(--border-strong) 68%,transparent);border-radius:999px;background:color-mix(in srgb,var(--surface) 88%,transparent);box-shadow:var(--shadow-lg);backdrop-filter:blur(16px);white-space:nowrap}
+.ppt-controls button{border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text-1);padding:8px 13px;min-width:74px;cursor:pointer;font:inherit;font-weight:800;line-height:1.1;box-shadow:0 2px 8px rgba(18,24,40,.06)}
+.ppt-controls button:hover{border-color:var(--accent);color:var(--accent)}
+.ppt-controls button:active{transform:translateY(1px)}
+.ppt-controls b{display:block;font-size:13px}
+.ppt-controls small{display:block;margin-top:2px;font-size:10px;color:var(--text-3);font-weight:700}
+.ppt-count{min-width:62px;text-align:center;font-weight:900;color:var(--text-2);font-size:14px}
+.ppt-hint{position:fixed;right:18px;top:14px;z-index:70;color:var(--text-3);font-size:12px;font-weight:700;background:color-mix(in srgb,var(--surface) 78%,transparent);border:1px solid var(--border);border-radius:999px;padding:6px 10px;backdrop-filter:blur(12px)}
+@media(max-width:900px){.signal-grid,.steps,.matrix,.map{grid-template-columns:1fr}.rowcard{grid-template-columns:1fr}.signal{min-height:auto}.quoteBox p{font-size:26px}.slide{padding:56px 18px 132px}.ppt-controls{left:8px;right:8px;bottom:10px;transform:none;justify-content:center;gap:4px;border-radius:18px;overflow-x:auto}.ppt-controls button{min-width:auto;padding:7px 8px}.ppt-controls b{font-size:12px}.ppt-controls small{display:none}.ppt-count{min-width:48px;font-size:12px}.ppt-hint{display:none}}
 </style>
 </head>
 <body data-themes="corporate-clean,swiss-grid,minimal-white,academic-paper,blueprint" data-theme-base="../assets/themes/">
+<div class="ppt-hint">← → / Space｜O 總覽｜S 講者｜F 全螢幕</div>
 <div class="deck">
 
   <section class="slide" data-title="封面">
@@ -203,4 +212,43 @@
   </section>
 </div>
 <script src="../assets/runtime.js"></script>
+<div class="ppt-controls" aria-label="簡報控制列">
+  <button type="button" data-action="prev"><b>上一頁</b><small>回到前一張</small></button>
+  <span class="ppt-count" aria-live="polite">1 / 12</span>
+  <button type="button" data-action="next"><b>下一頁</b><small>繼續播放</small></button>
+  <button type="button" data-action="overview"><b>總覽</b><small>查看全部</small></button>
+  <button type="button" data-action="speaker"><b>講者</b><small>開啟備註</small></button>
+  <button type="button" data-action="fullscreen"><b>全螢幕</b><small>投影播放</small></button>
+</div>
+<script>
+(function(){
+  const buttons = document.querySelectorAll('.ppt-controls button');
+  const count = document.querySelector('.ppt-count');
+  const slides = Array.from(document.querySelectorAll('.deck .slide'));
+  const keyFor = {
+    prev: 'ArrowLeft',
+    next: 'ArrowRight',
+    overview: 'o',
+    speaker: 's',
+    fullscreen: 'f'
+  };
+  function activeIndex(){
+    const i = slides.findIndex(s => s.classList.contains('is-active'));
+    return i >= 0 ? i : 0;
+  }
+  function updateCount(){
+    if (count) count.textContent = (activeIndex() + 1) + ' / ' + slides.length;
+  }
+  function sendKey(key){
+    document.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+    window.setTimeout(updateCount, 40);
+  }
+  buttons.forEach(button => {
+    button.addEventListener('click', () => sendKey(keyFor[button.dataset.action]));
+  });
+  document.addEventListener('keydown', () => window.setTimeout(updateCount, 40));
+  window.addEventListener('hashchange', updateCount);
+  window.setTimeout(updateCount, 80);
+})();
+</script>
 </body></html>
