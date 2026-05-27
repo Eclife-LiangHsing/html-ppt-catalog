@@ -18,7 +18,7 @@
 .controls button{border:1px solid rgba(13,35,56,.16);border-radius:999px;background:#fff;color:var(--ink);padding:9px 13px;min-width:76px;font-weight:900;cursor:pointer}.controls b{display:block;font-size:14px}.controls small{display:block;font-size:10px;color:var(--muted);font-weight:700}.count{font-weight:900;color:#455a70;min-width:58px;text-align:center}.progress{position:fixed;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--green),var(--blue),var(--gold));z-index:55}.hint{position:fixed;right:20px;top:16px;color:#7b8ea2;font-size:13px}
 body.overview{overflow:auto}body.overview .deck{height:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;padding:24px}body.overview .slide{display:flex;position:relative;inset:auto;min-height:250px;padding:22px;border:1px solid var(--line);border-radius:8px;overflow:hidden}body.overview .h1,body.overview .h2{font-size:24px}body.overview .lede,body.overview .card p,body.overview .source-card p,body.overview .step p{font-size:12px}body.overview .grid,body.overview .two,body.overview .source-grid,body.overview .shots,body.overview .timeline{grid-template-columns:1fr}body.overview .shot-card:nth-child(n+2),body.overview .deck-footer,body.overview .controls,body.overview .hint{display:none}
 .speaker{display:none;position:fixed;inset:5vh 6vw;background:#f8fbff;border:1px solid var(--line);border-radius:12px;z-index:80;padding:24px;box-shadow:0 30px 100px rgba(15,40,68,.32);grid-template-columns:1fr 1fr;gap:16px}.speaker.on{display:grid}.pane{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px;overflow:auto}.pane h2{margin-top:0;color:#075eb8}.script{font-size:22px;line-height:1.6}.closeSpeaker{position:absolute;right:18px;top:10px;border:0;background:transparent;color:var(--ink);font-size:32px}
-@media(max-width:900px){html,body{overflow:hidden}.slide{padding:54px 18px 176px;justify-content:flex-start;overflow:hidden}.h1{font-size:42px}.h2{font-size:31px}.lede{font-size:18px}.grid,.two,.source-grid,.timeline,.shots{grid-template-columns:1fr;gap:10px}.card,.source-card,.step{padding:14px}.card b,.source-card b,.step b{font-size:18px}.shot-card{display:grid;grid-template-columns:112px 1fr;gap:10px;align-items:center;padding:10px}.shot-card img{aspect-ratio:4/3}.shot-card b{margin:0 0 2px}.shot-card:nth-child(n+3){display:none}.deck-footer{left:18px;right:18px;bottom:calc(100px + env(safe-area-inset-bottom));font-size:12px}.controls{left:8px;right:8px;bottom:calc(18px + env(safe-area-inset-bottom));transform:none;justify-content:center;gap:4px;padding:6px;border-radius:22px}.controls button{width:55px;min-width:0;padding:8px 3px;flex:0 0 55px}.controls b{font-size:11px;white-space:nowrap}.controls small{display:none}.count{min-width:42px;font-size:12px}.fullBtn{display:none}.hint{display:none}.speaker{inset:4vh 4vw;grid-template-columns:1fr}.pane:nth-child(3){grid-column:auto!important}}
+@media(max-width:900px){html,body{overflow:hidden}.deck{height:100dvh}.slide{height:100dvh;padding:54px 18px calc(190px + env(safe-area-inset-bottom));justify-content:flex-start;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.slide>*{min-width:0}.h1,.h2,.lede{width:100%;max-width:100%;white-space:normal;overflow-wrap:anywhere;word-break:break-all;line-break:anywhere}.h1{font-size:40px}.h2{font-size:26px}.lede{font-size:18px}.grid,.two,.source-grid,.timeline,.shots{grid-template-columns:1fr;gap:10px}.card,.source-card,.step{padding:14px}.card b,.source-card b,.step b{font-size:18px}.shot-card{display:grid;grid-template-columns:112px 1fr;gap:10px;align-items:center;padding:10px}.shot-card img{aspect-ratio:4/3}.shot-card b{margin:0 0 2px}.shot-card:nth-child(n+3){display:none}.deck-footer{position:static;margin-top:4px;font-size:12px}.controls{left:8px;right:8px;bottom:calc(18px + env(safe-area-inset-bottom));transform:none;justify-content:center;gap:4px;padding:6px;border-radius:22px}.controls button{width:55px;min-width:0;padding:8px 3px;flex:0 0 55px}.controls b{font-size:11px;white-space:nowrap}.controls small{display:none}.count{min-width:42px;font-size:12px}.fullBtn{display:none}.hint{display:none}.speaker{inset:4vh 4vw;grid-template-columns:1fr}.pane:nth-child(3){grid-column:auto!important}}
 @media print{html,body{overflow:visible;background:white;color:#111}.deck{height:auto}.slide{position:relative;display:flex!important;height:100vh;page-break-after:always;color:#111;background:white}.lede,.card p,.source-card p,.step p{color:#333}.controls,.hint,.progress{display:none}.deck-footer{bottom:28px}.notes{display:block;border-top:1px solid #ccc;margin-top:18px;padding-top:12px;color:#333}}
 </style>
 </head>
@@ -42,14 +42,14 @@ body.overview{overflow:auto}body.overview .deck{height:auto;display:grid;grid-te
 </section>
 <section class="slide" data-title="兩線總圖">
   <p class="kicker">Two-Track Strategy</p>
-  <h2 class="h2">7 月活動要用同一套主題，打兩條不同路徑</h2>
+  <h2 class="h2">7 月活動要用同一套主題，<br>打兩條不同路徑</h2>
   <div class="two"><div class="card"><b>A 線｜線上會員電商轉換</b><p>EcLife 活動頁、APP、會員中心、LINE 官方帳號、EDM、SEO 文章與 Facebook 社群，把流量導向商品集合與會員回購。</p></div><div class="card"><b>B 線｜線下門市服務導購</b><p>門市查詢、店員話術、情境陳列、QR Code 回官網，讓現場諮詢變成可追蹤的活動入口。</p></div></div>
   <div class="deck-footer"><span>不要只做促銷頁，要做全通路導購閉環</span><span class="slide-number">3 / 12</span></div>
   <aside class="notes">重點是線上線下用同一套商品與素材，但追蹤入口不同。</aside>
 </section>
 <section class="slide" data-title="來源網站截圖">
   <p class="kicker">Reference Sites</p>
-  <h2 class="h2">視覺與連結改回良興網址列表裡的網站</h2>
+  <h2 class="h2">視覺與連結改回<br>良興網址列表裡的網站</h2>
   <div class="shots"><div class="shot-card"><img src="./assets/site-shots/eclife-home.png" alt="EcLife 良興購物網截圖"><b>EcLife 良興購物網</b><span>主活動頁與商品導流</span></div><div class="shot-card"><img src="./assets/site-shots/store-location.png" alt="良興門市查詢截圖"><b>良興門市查詢</b><span>線下導購與 QR 回流</span></div><div class="shot-card"><img src="./assets/site-shots/eclife-app.png" alt="良興 APP 截圖"><b>良興行動 APP</b><span>會員推播與回購入口</span></div><div class="shot-card"><img src="./assets/site-shots/eclife-service.png" alt="良興客服中心截圖"><b>良興客服中心</b><span>服務、售後、FAQ 支撐</span></div></div>
   <div class="deck-footer"><span>圖片來源：良興網址列表所列公開頁面截圖</span><span class="slide-number">4 / 12</span></div>
   <aside class="notes">這頁回應圖片不一樣的問題，直接放來源網站視覺。</aside>
@@ -71,21 +71,21 @@ body.overview{overflow:auto}body.overview .deck{height:auto;display:grid;grid-te
 </section>
 <section class="slide" data-title="A線線上">
   <p class="kicker">Track A</p>
-  <h2 class="h2">線上會員電商：把內容流量收回官網與會員</h2>
+  <h2 class="h2">線上會員電商：<br>把內容流量收回官網與會員</h2>
   <div class="grid"><div class="card"><b>EcLife 活動頁</b><p>Hero、四大情境、商品集合、FAQ、會員 CTA。</p></div><div class="card"><b>LINE / EDM</b><p>每週一個主題，避免一則訊息塞太多商品。</p></div><div class="card"><b>APP / 會員中心</b><p>依會員身份推送回購、加購與限時提醒。</p></div><div class="card"><b>SEO / 社群</b><p>做可搜尋題目：開學 3C 清單、視訊會議設備、Wi-Fi 7 升級。</p></div></div>
   <div class="deck-footer"><span>A 線 KPI：PV、CTR、轉換、會員回購</span><span class="slide-number">7 / 12</span></div>
   <aside class="notes">線上不是單頁促銷，而是官網、APP、會員、LINE、EDM 的組合。</aside>
 </section>
 <section class="slide" data-title="B線門市">
   <p class="kicker">Track B</p>
-  <h2 class="h2">線下門市：把現場服務變成可追蹤導購</h2>
+  <h2 class="h2">線下門市：<br>把現場服務變成可追蹤導購</h2>
   <div class="grid"><div class="card"><b>情境陳列</b><p>每店選 2 個最適合的情境，不要求所有店都做滿四區。</p></div><div class="card"><b>店員話術</b><p>從規格轉成問題：會議畫面糊？宿舍 Wi-Fi 弱？筆電容量不夠？</p></div><div class="card"><b>QR 回流</b><p>每區 QR 導回對應活動頁或商品集合，掛 UTM。</p></div><div class="card"><b>服務加購</b><p>線材、延保、清潔、備份儲存與售後服務頁。</p></div></div>
   <div class="deck-footer"><span>B 線 KPI：QR 掃碼、來客、主推品銷量、加購率</span><span class="slide-number">8 / 12</span></div>
   <aside class="notes">門市活動要降低店員負擔，給清楚話術和 QR。</aside>
 </section>
 <section class="slide" data-title="內容節奏">
   <p class="kicker">Content Calendar</p>
-  <h2 class="h2">7 月用四波節奏，而不是一次打完</h2>
+  <h2 class="h2">7 月用四波節奏，<br>而不是一次打完</h2>
   <div class="timeline"><div class="step"><b>6/24-6/30</b><p>商品、價格、贈品、素材與門市參與店點確認。</p></div><div class="step"><b>7/1-7/7</b><p>活動開跑，主打夏日換機總入口。</p></div><div class="step"><b>7/8-7/14</b><p>AI 辦公 / 直播效率週。</p></div><div class="step"><b>7/15-7/21</b><p>暑假電競升級週。</p></div><div class="step"><b>7/22-7/31</b><p>開學補給 + 最後倒數。</p></div></div>
   <div class="deck-footer"><span>素材節奏：LINE、EDM、FB、門市 QR 同步</span><span class="slide-number">9 / 12</span></div>
   <aside class="notes">每週只有一個消費理由，會比一次塞滿更清楚。</aside>
@@ -99,7 +99,7 @@ body.overview{overflow:auto}body.overview .deck{height:auto;display:grid;grid-te
 </section>
 <section class="slide" data-title="KPI">
   <p class="kicker">Measurement</p>
-  <h2 class="h2">先定可追蹤 KPI，結案報告才有意義</h2>
+  <h2 class="h2">先定可追蹤 KPI，<br>結案報告才有意義</h2>
   <div class="grid"><div class="card"><b>線上</b><p>活動頁 PV、商品點擊率、LINE CTR、EDM CTR、轉換率、營收。</p></div><div class="card"><b>線下</b><p>QR 掃碼、門市來客、主推品銷量、加購率、客單價。</p></div><div class="card"><b>內容</b><p>SEO 曝光、搜尋點擊、FB 互動、短影音觀看完成率。</p></div><div class="card"><b>管理摘要</b><p>哪個情境有效、哪個品類成交、下次檔期怎麼調整。</p></div></div>
   <div class="deck-footer"><span>每個入口都要掛 UTM 或 QR 來源</span><span class="slide-number">11 / 12</span></div>
   <aside class="notes">兩線活動最怕做完不知道哪個動作有效，所以要先定追蹤。</aside>
