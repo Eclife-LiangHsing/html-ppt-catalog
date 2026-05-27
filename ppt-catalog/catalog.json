@@ -13,13 +13,13 @@
   {
     "slug": "liangxing-july-campaign-202607",
     "name": "良興 7 月活動企劃｜夏日換機・AI效率補給站",
-    "desc": "依良興官網商品快取製作的 7 月活動企劃展示版，包含活動主題、兩線行銷架構、四大商品分區、活動頁架構、SEO 題目、LINE/EDM/社群文案節奏、KPI 與結案報告模板；ZIP 內含 PPTX 與 Word 檔。",
-    "source": "良興購物網商品快取 data/eclife_products_latest.ndjson（10000 筆，更新 2026-05-19）+ Jason/賴總 Telegram 指示。",
+    "desc": "依良興網址列表與商品快取製作的 7 月兩線活動企劃修正版，補上手機可用的底部上一頁/下一頁控制列、標準頁尾、來源網站截圖、活動主題、線上/線下行銷架構、四大情境、素材節奏、KPI 與待確認事項；ZIP 內含 PPTX 與 Word 檔。",
+    "source": "良興網址列表 websites.html（EcLife 購物網、門市查詢、APP、會員中心、客服/售後、LINE、Facebook 等入口）+ 良興購物網商品快取 data/eclife_products_latest.ndjson（10000 筆，更新 2026-05-19）+ Jason/賴總 Telegram 指示。",
     "date": "2026-05-25",
     "category": "良興活動企劃",
     "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-july-campaign-202607/",
     "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-july-campaign-202607/liangxing-july-campaign-202607.zip",
-    "note": "7 月活動第一版｜正式上線前需由良興確認主推商品、庫存、毛利與優惠規則。"
+    "note": "7 月活動修正版｜已補上手機底部控制列與網址列表來源截圖；正式上線前需由良興確認主推商品、庫存、毛利與優惠規則。"
   },
   {
     "slug": "liangxing-ai-marketing-system-20260525",
