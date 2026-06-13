@@ -182,7 +182,7 @@
     <header>
       <div>
         <h1>良興世界盃預測挑戰</h1>
-        <p class="lead">純趣味預測，沒有金流、投注或獎金機制。填姓名、選擇看好的結果，按確認送出後留下小興可統計的 Telegram 紀錄。</p>
+        <p class="lead">純趣味預測，沒有金流、投注或獎金機制。填姓名、選擇看好的結果，按確認送出後會留在本頁，直接看到自己的送出紀錄。</p>
       </div>
       <div class="scoreboard">
         <b>小興本輪目標</b>
@@ -206,11 +206,11 @@
     <section>
       <div class="actions">
         <button class="primary" id="confirmSubmit">確認送出預測</button>
-        <button class="secondary" id="openTelegram" disabled>重新開啟 Telegram 登記</button>
+        <button class="secondary" id="editAgain">修改後重新送出</button>
       </div>
       <div class="status" id="submitStatus">尚未送出。請完成姓名與 4 場預測後按「確認送出」。</div>
-      <textarea id="record" readonly placeholder="按下確認送出後，這裡會出現小興統計用的標準化紀錄。"></textarea>
-      <p class="note">按「確認送出」會先存在本機紀錄，並開啟 Telegram 送出視窗；送到良興群後，群組訊息就是小興後續統計命中率與排行榜的依據。</p>
+      <textarea id="record" readonly placeholder="按下確認送出後，這裡會出現你的預測紀錄。"></textarea>
+      <p class="note">目前這版會把紀錄存在使用者自己的瀏覽器，不會跳出 Telegram。若要給不在本群的員工使用並由小興集中統計，需要再接 Google Sheet / Apps Script / 會員系統 API 這類後端收單。</p>
       <h2 class="section-title">本機已送出紀錄</h2>
       <div class="submissions" id="submissions"></div>
     </section>
@@ -220,7 +220,7 @@
       <div class="ranking">
         <div class="rank"><strong>0%</strong><span>尚未開賽，等待賽果。</span></div>
         <div class="rank"><strong>0 / 4</strong><span>個人命中場次。</span></div>
-        <div class="rank"><strong>待更新</strong><span>排行榜會依 Telegram 登記紀錄整理。</span></div>
+        <div class="rank"><strong>待更新</strong><span>排行榜會依後續集中收單紀錄整理。</span></div>
       </div>
     </section>
   </main>
@@ -237,7 +237,6 @@
     const root = document.getElementById("matches");
     const ledgerKey = "lianghsingWorldCupPicks20260613";
     const statusBox = document.getElementById("submitStatus");
-    let lastRecord = "";
 
     matches.forEach((match) => {
       const card = document.createElement("article");
@@ -342,30 +341,19 @@
       }).join("");
     }
 
-    function openTelegram(record) {
-      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(record)}`;
-      window.open(shareUrl, "_blank", "noopener,noreferrer");
-    }
-
     document.getElementById("confirmSubmit").addEventListener("click", () => {
       const submission = getSubmission();
       if (!submission) return;
       const record = buildRecord(submission);
-      lastRecord = record;
       document.getElementById("record").value = record;
       saveLocalSubmission(submission, record);
-      document.getElementById("openTelegram").disabled = false;
-      setStatus("ok", `已在本機留下送出紀錄：${submission.code}。Telegram 視窗開啟後，送到良興群；小興會用群組訊息統計排行榜。`);
-      openTelegram(record);
+      setStatus("ok", `已送出並顯示在本頁紀錄：${submission.code}。你可以在下方「本機已送出紀錄」確認自己的資料。`);
+      document.getElementById("submissions").scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
-    document.getElementById("openTelegram").addEventListener("click", () => {
-      const record = lastRecord || document.getElementById("record").value;
-      if (!record) {
-        alert("請先確認送出預測。");
-        return;
-      }
-      openTelegram(record);
+    document.getElementById("editAgain").addEventListener("click", () => {
+      setStatus("warn", "可直接修改上方選項，再按一次「確認送出預測」覆蓋同姓名的本機紀錄。");
+      document.getElementById("playerName").focus();
     });
 
     renderLocalSubmissions();
