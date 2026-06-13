@@ -121,6 +121,18 @@
     }
     .primary { background: var(--brand); color: white; }
     .secondary { background: #e8edf3; color: var(--ink); }
+    .status {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      background: white;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .status.ok { border-color: rgba(13, 122, 88, .35); background: #e8f6ef; color: #07563d; }
+    .status.warn { border-color: rgba(242, 183, 5, .55); background: #fff9df; color: #725500; }
     textarea {
       width: 100%;
       min-height: 190px;
@@ -156,7 +168,7 @@
     <header>
       <div>
         <h1>良興世界盃預測挑戰</h1>
-        <p class="lead">純趣味預測，沒有金流、投注或獎金機制。填姓名、選擇看好的結果，一鍵產生 Telegram 紀錄文字，賽後再回來統計命中率。</p>
+        <p class="lead">純趣味預測，沒有金流、投注或獎金機制。填姓名、選擇看好的結果，按確認送出後留下小興可統計的 Telegram 紀錄。</p>
       </div>
       <div class="scoreboard">
         <b>小興本輪目標</b>
@@ -179,11 +191,13 @@
 
     <section>
       <div class="actions">
-        <button class="primary" id="generate">產生 Telegram 預測紀錄</button>
-        <button class="secondary" id="copy">複製紀錄</button>
+        <button class="secondary" id="preview">預覽紀錄</button>
+        <button class="primary" id="confirmSubmit">確認送出</button>
+        <button class="secondary" id="copy">備用複製</button>
       </div>
-      <textarea id="record" readonly placeholder="按下產生後，這裡會出現可貼到 Telegram 群組的預測紀錄。"></textarea>
-      <p class="note">第一版使用 Telegram 標準化文字紀錄，避免公開寫入後端資料庫或 Google Sheet 授權卡住。正式統計時可由群組訊息彙整命中率。</p>
+      <div class="status" id="submitStatus">尚未送出。請完成姓名與 4 場預測後按「確認送出」。</div>
+      <textarea id="record" readonly placeholder="按下預覽或確認送出後，這裡會出現小興統計用的標準化紀錄。"></textarea>
+      <p class="note">按「確認送出」會開啟 Telegram 送出視窗；送到良興群後，群組訊息就是小興後續統計命中率與排行榜的依據。</p>
     </section>
 
     <section>
@@ -206,6 +220,8 @@
     const picks = new Map();
     const labels = { home: "主隊勝", draw: "平手", away: "客隊勝" };
     const root = document.getElementById("matches");
+    const ledgerKey = "lianghsingWorldCupPicks20260613";
+    const statusBox = document.getElementById("submitStatus");
 
     matches.forEach((match) => {
       const card = document.createElement("article");
@@ -234,41 +250,85 @@
       root.appendChild(card);
     });
 
-    function buildRecord() {
+    function getSubmission() {
       const name = document.getElementById("playerName").value.trim();
       if (!name) {
         alert("請先填寫姓名。");
-        return "";
+        return null;
       }
       const missing = matches.filter((match) => !picks.has(match.id));
       if (missing.length) {
         alert("請完成 4 場比賽預測。");
-        return "";
+        return null;
       }
+      return {
+        event: "lianghsing-world-cup-fun-picks-20260613",
+        name,
+        sentAt: new Date().toLocaleString("zh-TW", { hour12: false }),
+        picks: matches.map((match) => ({
+          id: match.id,
+          home: match.home,
+          away: match.away,
+          pick: picks.get(match.id),
+          label: labels[picks.get(match.id)]
+        }))
+      };
+    }
+
+    function buildRecord(submission) {
       const lines = [
         "【良興世界盃預測挑戰】",
-        `參加者：${name}`,
-        `送出時間：${new Date().toLocaleString("zh-TW", { hour12: false })}`,
+        `參加者：${submission.name}`,
+        `送出時間：${submission.sentAt}`,
         ""
       ];
-      matches.forEach((match, index) => {
-        lines.push(`${index + 1}. ${match.home} vs ${match.away}：${labels[picks.get(match.id)]}`);
+      submission.picks.forEach((pick, index) => {
+        lines.push(`${index + 1}. ${pick.home} vs ${pick.away}：${pick.label}`);
       });
+      lines.push(`小興統計碼：WC20260613 ${submission.picks.map((pick) => `${pick.id}=${pick.pick}`).join(" ")}`);
       lines.push("", "備註：純趣味預測，無投注、無金流、無獎金。");
       return lines.join("\n");
     }
 
-    document.getElementById("generate").addEventListener("click", () => {
-      const record = buildRecord();
-      if (record) document.getElementById("record").value = record;
+    function saveLocalSubmission(submission, record) {
+      const existing = JSON.parse(localStorage.getItem(ledgerKey) || "[]");
+      const next = existing.filter((item) => item.name !== submission.name);
+      next.push({ ...submission, record });
+      localStorage.setItem(ledgerKey, JSON.stringify(next));
+    }
+
+    function setStatus(type, message) {
+      statusBox.className = `status ${type}`;
+      statusBox.textContent = message;
+    }
+
+    document.getElementById("preview").addEventListener("click", () => {
+      const submission = getSubmission();
+      if (!submission) return;
+      const record = buildRecord(submission);
+      document.getElementById("record").value = record;
+      setStatus("warn", "已產生預覽，還沒送出。確認內容正確後請按「確認送出」。");
+    });
+
+    document.getElementById("confirmSubmit").addEventListener("click", () => {
+      const submission = getSubmission();
+      if (!submission) return;
+      const record = buildRecord(submission);
+      document.getElementById("record").value = record;
+      saveLocalSubmission(submission, record);
+      setStatus("ok", "已在本機留下送出紀錄。Telegram 視窗開啟後，請送到良興群；小興會用群組訊息統計排行榜。");
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(record)}`;
+      window.open(shareUrl, "_blank", "noopener,noreferrer");
     });
 
     document.getElementById("copy").addEventListener("click", async () => {
-      const record = document.getElementById("record").value || buildRecord();
+      const existing = document.getElementById("record").value;
+      const submission = existing ? null : getSubmission();
+      const record = existing || (submission ? buildRecord(submission) : "");
       if (!record) return;
       document.getElementById("record").value = record;
       await navigator.clipboard.writeText(record);
-      alert("已複製預測紀錄。");
+      setStatus("warn", "已複製備用紀錄；正式統計仍以送到良興群的 Telegram 訊息為準。");
     });
   </script>
 </body>
