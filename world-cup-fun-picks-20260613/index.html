@@ -133,6 +133,7 @@
     }
     .status.ok { border-color: rgba(13, 122, 88, .35); background: #e8f6ef; color: #07563d; }
     .status.warn { border-color: rgba(242, 183, 5, .55); background: #fff9df; color: #725500; }
+    .status.error { border-color: rgba(235, 51, 73, .35); background: #fff0f2; color: #8c1020; }
     textarea {
       width: 100%;
       min-height: 190px;
@@ -182,7 +183,7 @@
     <header>
       <div>
         <h1>良興世界盃預測挑戰</h1>
-        <p class="lead">純趣味預測，沒有金流、投注或獎金機制。填姓名、選擇看好的結果，按確認送出後會留在本頁，直接看到自己的送出紀錄。</p>
+        <p class="lead">純趣味預測，沒有金流、投注或獎金機制。填姓名、選擇看好的結果，按確認送出後會留在本頁，集中收單啟用後可看到全部參加者紀錄。</p>
       </div>
       <div class="scoreboard">
         <b>小興本輪目標</b>
@@ -207,10 +208,13 @@
       <div class="actions">
         <button class="primary" id="confirmSubmit">確認送出預測</button>
         <button class="secondary" id="editAgain">修改後重新送出</button>
+        <button class="secondary" id="refreshCentral">重新整理全部紀錄</button>
       </div>
       <div class="status" id="submitStatus">尚未送出。請完成姓名與 4 場預測後按「確認送出」。</div>
       <textarea id="record" readonly placeholder="按下確認送出後，這裡會出現你的預測紀錄。"></textarea>
-      <p class="note">目前這版會把紀錄存在使用者自己的瀏覽器，不會跳出其他 App。若要給不同群組或公司員工使用並由小興集中統計，需要再接 Google Sheet / Apps Script / 會員系統 API 這類後端收單。</p>
+      <p class="note" id="apiNote">目前集中收單 API 尚未啟用；本頁已支援 Google Sheet / Apps Script 收單，部署後可讓不同員工看到同一份紀錄。</p>
+      <h2 class="section-title">全部參加者紀錄</h2>
+      <div class="submissions" id="centralSubmissions"></div>
       <h2 class="section-title">本機已送出紀錄</h2>
       <div class="submissions" id="submissions"></div>
     </section>
@@ -237,6 +241,7 @@
     const root = document.getElementById("matches");
     const ledgerKey = "lianghsingWorldCupPicks20260613";
     const statusBox = document.getElementById("submitStatus");
+    const centralApiEndpoint = "";
 
     matches.forEach((match) => {
       const card = document.createElement("article");
@@ -315,6 +320,39 @@
       renderLocalSubmissions();
     }
 
+    function jsonpRequest(params) {
+      return new Promise((resolve, reject) => {
+        if (!centralApiEndpoint) {
+          reject(new Error("central api not configured"));
+          return;
+        }
+        const callbackName = `wcCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+        const script = document.createElement("script");
+        const timeout = window.setTimeout(() => {
+          cleanup();
+          reject(new Error("central api timeout"));
+        }, 12000);
+
+        function cleanup() {
+          window.clearTimeout(timeout);
+          delete window[callbackName];
+          script.remove();
+        }
+
+        window[callbackName] = (payload) => {
+          cleanup();
+          resolve(payload);
+        };
+        const query = new URLSearchParams({ ...params, callback: callbackName });
+        script.src = `${centralApiEndpoint}?${query.toString()}`;
+        script.onerror = () => {
+          cleanup();
+          reject(new Error("central api load failed"));
+        };
+        document.body.appendChild(script);
+      });
+    }
+
     function setStatus(type, message) {
       statusBox.className = `status ${type}`;
       statusBox.textContent = message;
@@ -341,14 +379,68 @@
       }).join("");
     }
 
-    document.getElementById("confirmSubmit").addEventListener("click", () => {
+    function renderCentralSubmissions(items, message) {
+      const list = document.getElementById("centralSubmissions");
+      if (!centralApiEndpoint) {
+        list.innerHTML = '<div class="submission"><b>集中收單尚未啟用</b><small>等 Google Sheet / Apps Script Web App URL 部署後，這裡會顯示全部參加者紀錄。</small></div>';
+        return;
+      }
+      if (!items || !items.length) {
+        list.innerHTML = `<div class="submission"><b>尚無集中紀錄</b><small>${message || "目前後端尚未收到資料。"}</small></div>`;
+        return;
+      }
+      list.innerHTML = items.map((item) => {
+        const summary = matches.map((match) => `${match.home} vs ${match.away}：${labels[item[match.id]] || item[match.id] || "未填"}`).join(" / ");
+        return `<div class="submission"><b>${item.name || "未命名"}｜${item.code || "已登記"}</b><small>${item.sentAt || ""}</small><br>${summary}</div>`;
+      }).join("");
+    }
+
+    async function submitToCentral(submission) {
+      const payload = encodeURIComponent(JSON.stringify(submission));
+      const response = await jsonpRequest({ action: "submit", payload });
+      if (!response || !response.ok) {
+        throw new Error(response && response.error ? response.error : "central submit failed");
+      }
+      return response;
+    }
+
+    async function refreshCentralSubmissions() {
+      if (!centralApiEndpoint) {
+        renderCentralSubmissions([]);
+        setStatus("warn", "集中收單 API 尚未啟用；目前只能在本機看到自己的測試紀錄。");
+        return;
+      }
+      try {
+        const response = await jsonpRequest({ action: "list" });
+        if (!response || !response.ok) throw new Error(response && response.error ? response.error : "central list failed");
+        renderCentralSubmissions(response.items || []);
+      } catch (error) {
+        renderCentralSubmissions([], "讀取集中紀錄失敗，請稍後再試。");
+        setStatus("error", "集中紀錄讀取失敗；本機紀錄仍保留在此裝置。");
+      }
+    }
+
+    document.getElementById("confirmSubmit").addEventListener("click", async () => {
       const submission = getSubmission();
       if (!submission) return;
       const record = buildRecord(submission);
       document.getElementById("record").value = record;
       saveLocalSubmission(submission, record);
-      setStatus("ok", `已送出並顯示在本頁紀錄：${submission.code}。你可以在下方「本機已送出紀錄」確認自己的資料。`);
-      document.getElementById("submissions").scrollIntoView({ behavior: "smooth", block: "start" });
+      if (!centralApiEndpoint) {
+        setStatus("warn", `已先顯示在本機紀錄：${submission.code}。集中收單 API 尚未啟用，所以其他人目前還看不到這筆資料。`);
+        document.getElementById("submissions").scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      setStatus("warn", "正在送出到集中紀錄...");
+      try {
+        await submitToCentral(submission);
+        setStatus("ok", `已送出到集中紀錄：${submission.code}。下方會顯示全部參加者紀錄。`);
+        await refreshCentralSubmissions();
+        document.getElementById("centralSubmissions").scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (error) {
+        setStatus("error", `集中送出失敗；已先保存在本機紀錄：${submission.code}。`);
+        document.getElementById("submissions").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     });
 
     document.getElementById("editAgain").addEventListener("click", () => {
@@ -356,7 +448,10 @@
       document.getElementById("playerName").focus();
     });
 
+    document.getElementById("refreshCentral").addEventListener("click", refreshCentralSubmissions);
+
     renderLocalSubmissions();
+    renderCentralSubmissions([]);
   </script>
 </body>
 </html>
