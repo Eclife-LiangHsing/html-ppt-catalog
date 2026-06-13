@@ -206,9 +206,9 @@
 
     <section>
       <div class="actions">
-        <button class="primary" id="confirmSubmit">確認送出預測</button>
-        <button class="secondary" id="editAgain">修改後重新送出</button>
-        <button class="secondary" id="refreshCentral">重新整理全部紀錄</button>
+        <button class="primary" id="confirmSubmit" type="button">確認送出預測</button>
+        <button class="secondary" id="editAgain" type="button">修改後重新送出</button>
+        <button class="secondary" id="refreshCentral" type="button">重新整理全部紀錄</button>
       </div>
       <div class="status" id="submitStatus">尚未送出。請完成姓名與 4 場預測後按「確認送出」。</div>
       <textarea id="record" readonly placeholder="按下確認送出後，這裡會出現你的預測紀錄。"></textarea>
@@ -358,6 +358,24 @@
       statusBox.textContent = message;
     }
 
+    function formatDisplayTime(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (!Number.isNaN(date.getTime())) {
+        return date.toLocaleString("zh-TW", {
+          timeZone: "Asia/Taipei",
+          hour12: false,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        });
+      }
+      return String(value);
+    }
+
     function getLocalSubmissions() {
       try {
         return JSON.parse(localStorage.getItem(ledgerKey) || "[]");
@@ -391,7 +409,7 @@
       }
       list.innerHTML = items.map((item) => {
         const summary = matches.map((match) => `${match.home} vs ${match.away}：${labels[item[match.id]] || item[match.id] || "未填"}`).join(" / ");
-        return `<div class="submission"><b>${item.name || "未命名"}｜${item.code || "已登記"}</b><small>${item.sentAt || ""}</small><br>${summary}</div>`;
+        return `<div class="submission"><b>${item.name || "未命名"}｜${item.code || "已登記"}</b><small>${formatDisplayTime(item.sentAt)}</small><br>${summary}</div>`;
       }).join("");
     }
 
@@ -420,7 +438,8 @@
       }
     }
 
-    document.getElementById("confirmSubmit").addEventListener("click", async () => {
+    document.getElementById("confirmSubmit").addEventListener("click", async (event) => {
+      event.preventDefault();
       const submission = getSubmission();
       if (!submission) return;
       const record = buildRecord(submission);
@@ -443,12 +462,16 @@
       }
     });
 
-    document.getElementById("editAgain").addEventListener("click", () => {
+    document.getElementById("editAgain").addEventListener("click", (event) => {
+      event.preventDefault();
       setStatus("warn", "可直接修改上方選項，再按一次「確認送出預測」覆蓋同姓名的本機紀錄。");
       document.getElementById("playerName").focus();
     });
 
-    document.getElementById("refreshCentral").addEventListener("click", refreshCentralSubmissions);
+    document.getElementById("refreshCentral").addEventListener("click", (event) => {
+      event.preventDefault();
+      refreshCentralSubmissions();
+    });
 
     renderLocalSubmissions();
     refreshCentralSubmissions();
