@@ -307,8 +307,8 @@
       submission.picks.forEach((pick, index) => {
         lines.push(`${index + 1}. ${pick.home} vs ${pick.away}：${pick.label}`);
       });
-      lines.push(`小興統計碼：WC20260613 ${submission.picks.map((pick) => `${pick.id}=${pick.pick}`).join(" ")}`);
-      lines.push("", "備註：純趣味預測，無投注、無金流、無獎金。");
+      lines.push(`預測資料：WC20260613 ${submission.picks.map((pick) => `${pick.id}=${pick.pick}`).join(" ")}`);
+      lines.push("", "備註：純趣味預測，無投注、無金流、無獎金；正式紀錄以 Google Sheet 集中收單為準。");
       return lines.join("\n");
     }
 
