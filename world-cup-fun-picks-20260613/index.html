@@ -212,7 +212,7 @@
       </div>
       <div class="status" id="submitStatus">尚未送出。請完成姓名與 4 場預測後按「確認送出」。</div>
       <textarea id="record" readonly placeholder="按下確認送出後，這裡會出現你的預測紀錄。"></textarea>
-      <p class="note" id="apiNote">目前集中收單 API 尚未啟用；本頁已支援 Google Sheet / Apps Script 收單，部署後可讓不同員工看到同一份紀錄。</p>
+      <p class="note" id="apiNote">集中收單已啟用；送出後會寫入 Google Sheet，並可在下方看到全部參加者紀錄。</p>
       <h2 class="section-title">全部參加者紀錄</h2>
       <div class="submissions" id="centralSubmissions"></div>
       <h2 class="section-title">本機已送出紀錄</h2>
@@ -241,7 +241,7 @@
     const root = document.getElementById("matches");
     const ledgerKey = "lianghsingWorldCupPicks20260613";
     const statusBox = document.getElementById("submitStatus");
-    const centralApiEndpoint = "";
+    const centralApiEndpoint = "https://script.google.com/macros/s/AKfycbxZtpelKU2euzwf0umFf5JGecKoFWaCEC_qWoNiEPhNZglqPzc9tx3G4mm2QweeIyQ9lQ/exec";
 
     matches.forEach((match) => {
       const card = document.createElement("article");
@@ -407,7 +407,7 @@
     async function refreshCentralSubmissions() {
       if (!centralApiEndpoint) {
         renderCentralSubmissions([]);
-        setStatus("warn", "集中收單 API 尚未啟用；目前只能在本機看到自己的測試紀錄。");
+        setStatus("warn", "集中收單連線尚未設定；目前只能在本機看到自己的測試紀錄。");
         return;
       }
       try {
@@ -427,7 +427,7 @@
       document.getElementById("record").value = record;
       saveLocalSubmission(submission, record);
       if (!centralApiEndpoint) {
-        setStatus("warn", `已先顯示在本機紀錄：${submission.code}。集中收單 API 尚未啟用，所以其他人目前還看不到這筆資料。`);
+        setStatus("warn", `已先顯示在本機紀錄：${submission.code}。集中收單連線尚未設定，所以其他人目前還看不到這筆資料。`);
         document.getElementById("submissions").scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
@@ -451,7 +451,7 @@
     document.getElementById("refreshCentral").addEventListener("click", refreshCentralSubmissions);
 
     renderLocalSubmissions();
-    renderCentralSubmissions([]);
+    refreshCentralSubmissions();
   </script>
 </body>
 </html>
