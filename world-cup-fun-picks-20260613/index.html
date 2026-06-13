@@ -143,6 +143,20 @@
       line-height: 1.6;
       resize: vertical;
     }
+    .submissions {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .submission {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      line-height: 1.55;
+    }
+    .submission b { display: block; margin-bottom: 4px; }
+    .submission small { color: var(--muted); }
     .ranking {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -191,13 +205,14 @@
 
     <section>
       <div class="actions">
-        <button class="secondary" id="preview">預覽紀錄</button>
-        <button class="primary" id="confirmSubmit">確認送出</button>
-        <button class="secondary" id="copy">備用複製</button>
+        <button class="primary" id="confirmSubmit">確認送出預測</button>
+        <button class="secondary" id="openTelegram" disabled>重新開啟 Telegram 登記</button>
       </div>
       <div class="status" id="submitStatus">尚未送出。請完成姓名與 4 場預測後按「確認送出」。</div>
-      <textarea id="record" readonly placeholder="按下預覽或確認送出後，這裡會出現小興統計用的標準化紀錄。"></textarea>
-      <p class="note">按「確認送出」會開啟 Telegram 送出視窗；送到良興群後，群組訊息就是小興後續統計命中率與排行榜的依據。</p>
+      <textarea id="record" readonly placeholder="按下確認送出後，這裡會出現小興統計用的標準化紀錄。"></textarea>
+      <p class="note">按「確認送出」會先存在本機紀錄，並開啟 Telegram 送出視窗；送到良興群後，群組訊息就是小興後續統計命中率與排行榜的依據。</p>
+      <h2 class="section-title">本機已送出紀錄</h2>
+      <div class="submissions" id="submissions"></div>
     </section>
 
     <section>
@@ -205,7 +220,7 @@
       <div class="ranking">
         <div class="rank"><strong>0%</strong><span>尚未開賽，等待賽果。</span></div>
         <div class="rank"><strong>0 / 4</strong><span>個人命中場次。</span></div>
-        <div class="rank"><strong>待更新</strong><span>排行榜會依 Telegram 紀錄整理。</span></div>
+        <div class="rank"><strong>待更新</strong><span>排行榜會依 Telegram 登記紀錄整理。</span></div>
       </div>
     </section>
   </main>
@@ -222,6 +237,7 @@
     const root = document.getElementById("matches");
     const ledgerKey = "lianghsingWorldCupPicks20260613";
     const statusBox = document.getElementById("submitStatus");
+    let lastRecord = "";
 
     matches.forEach((match) => {
       const card = document.createElement("article");
@@ -263,6 +279,7 @@
       }
       return {
         event: "lianghsing-world-cup-fun-picks-20260613",
+        code: `LH-${Date.now().toString(36).toUpperCase()}`,
         name,
         sentAt: new Date().toLocaleString("zh-TW", { hour12: false }),
         picks: matches.map((match) => ({
@@ -278,6 +295,7 @@
     function buildRecord(submission) {
       const lines = [
         "【良興世界盃預測挑戰】",
+        `登記編號：${submission.code}`,
         `參加者：${submission.name}`,
         `送出時間：${submission.sentAt}`,
         ""
@@ -295,6 +313,7 @@
       const next = existing.filter((item) => item.name !== submission.name);
       next.push({ ...submission, record });
       localStorage.setItem(ledgerKey, JSON.stringify(next));
+      renderLocalSubmissions();
     }
 
     function setStatus(type, message) {
@@ -302,34 +321,54 @@
       statusBox.textContent = message;
     }
 
-    document.getElementById("preview").addEventListener("click", () => {
-      const submission = getSubmission();
-      if (!submission) return;
-      const record = buildRecord(submission);
-      document.getElementById("record").value = record;
-      setStatus("warn", "已產生預覽，還沒送出。確認內容正確後請按「確認送出」。");
-    });
+    function getLocalSubmissions() {
+      try {
+        return JSON.parse(localStorage.getItem(ledgerKey) || "[]");
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function renderLocalSubmissions() {
+      const list = document.getElementById("submissions");
+      const submissions = getLocalSubmissions().slice().reverse();
+      if (!submissions.length) {
+        list.innerHTML = '<div class="submission"><b>尚無紀錄</b><small>確認送出後會在這裡看到本機保存的預測。</small></div>';
+        return;
+      }
+      list.innerHTML = submissions.map((item) => {
+        const summary = item.picks.map((pick) => `${pick.home} vs ${pick.away}：${pick.label}`).join(" / ");
+        return `<div class="submission"><b>${item.name}｜${item.code || "已登記"}</b><small>${item.sentAt}</small><br>${summary}</div>`;
+      }).join("");
+    }
+
+    function openTelegram(record) {
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(record)}`;
+      window.open(shareUrl, "_blank", "noopener,noreferrer");
+    }
 
     document.getElementById("confirmSubmit").addEventListener("click", () => {
       const submission = getSubmission();
       if (!submission) return;
       const record = buildRecord(submission);
+      lastRecord = record;
       document.getElementById("record").value = record;
       saveLocalSubmission(submission, record);
-      setStatus("ok", "已在本機留下送出紀錄。Telegram 視窗開啟後，請送到良興群；小興會用群組訊息統計排行榜。");
-      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(record)}`;
-      window.open(shareUrl, "_blank", "noopener,noreferrer");
+      document.getElementById("openTelegram").disabled = false;
+      setStatus("ok", `已在本機留下送出紀錄：${submission.code}。Telegram 視窗開啟後，送到良興群；小興會用群組訊息統計排行榜。`);
+      openTelegram(record);
     });
 
-    document.getElementById("copy").addEventListener("click", async () => {
-      const existing = document.getElementById("record").value;
-      const submission = existing ? null : getSubmission();
-      const record = existing || (submission ? buildRecord(submission) : "");
-      if (!record) return;
-      document.getElementById("record").value = record;
-      await navigator.clipboard.writeText(record);
-      setStatus("warn", "已複製備用紀錄；正式統計仍以送到良興群的 Telegram 訊息為準。");
+    document.getElementById("openTelegram").addEventListener("click", () => {
+      const record = lastRecord || document.getElementById("record").value;
+      if (!record) {
+        alert("請先確認送出預測。");
+        return;
+      }
+      openTelegram(record);
     });
+
+    renderLocalSubmissions();
   </script>
 </body>
 </html>
