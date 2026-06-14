@@ -1,93 +1,14 @@
 [
   {
-    "slug": "ochiai-ai-forecast-20260614",
-    "name": "落合陽一 AI 預言｜白領、戰爭、日本與人類價值 HTML PPT",
-    "desc": "依 YouTube 影片繁中字幕整理的 AI 趨勢簡報，包含白領工作重估、實體 AI 與戰爭、日本少子化下的產業機會、KPI 組織轉型，以及良興團隊可討論的 AI agent 落地題。頁面內含繁中語音導覽與一頁式資訊圖表。",
-    "source": "YouTube 影片「日本天才落合：今年『這技能』將完全無用」繁中字幕、章節與影片描述；小興 2026-06-14 整理為 HTML PPT、資訊圖表與語音導覽。",
-    "date": "2026-06-14",
-    "category": "AI 趨勢",
-    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-forecast-20260614/",
-    "infographic_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-forecast-20260614/infographic.html",
-    "audio_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-forecast-20260614/assets/narration.wav",
-    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-forecast-20260614/ochiai-ai-forecast-20260614.zip",
-    "note": "已補標準底部控制列、講者/總覽/全螢幕控制，以及繁中語音導覽。"
-  },
-  {
-    "slug": "ochiai-ai-future-visual",
-    "name": "落合陽一的 AI 未來預言｜白領終結、實體 AI 與日本機會",
-    "desc": "依 Ben桑日本漫談 2026-06-11 影片整理，濃縮落合陽一對 AI 技術革命、白領工作、coding、實體 AI/國防、日本少子化與重工/IP、人類價值的核心觀點。",
-    "source": "YouTube：Ben桑日本漫談《日本天才落合：今年「這技能」將完全無用...》https://www.youtube.com/watch?v=I6p3pz9h5JM；手動繁中字幕整理",
-    "date": "2026-06-14",
-    "category": "AI 趨勢",
-    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-future-visual/",
-    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/downloads/ochiai-ai-future-visual.zip",
-    "notes": "影片二次整理簡報；含瀏覽器語音導覽與逐頁講稿。"
-  },
-  {
     "slug": "ubco-william-2026",
     "name": "William 學校調查｜UBC Okanagan 校區與 Kelowna 生活參考",
     "desc": "中文版 UBC Okanagan 初版調查 PPT，整理校區定位、住宿交通、科系出路、Kelowna 生活採買與九月陪同 2-3 週建議行程。",
-    "source": "UBCO 官方 Facts and Figures、Housing、Admissions Residence Okanagan、From the Airport、City of Kelowna Transit、UBCO Engineering / Science、Tourism Kelowna；小興 2026-05-29 中文整理。",
+    "source": "UBCO 官方 Facts and Figures、Housing、Admissions Residence Okanagan、From the Airport、City of Kelowna Transit、UBCO Engineering / Science、Tourism Kelowna；2026-05-29 中文整理。",
     "date": "2026-05-29",
     "category": "留學/教育調查",
     "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ubco-william-2026/",
     "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ubco-william-2026/ubco-william-2026-html-ppt.zip",
     "note": "William 大學參考案初版；後續可補 William 科系、宿舍樓名、搬入日、學費與逐日 checklist。"
-  },
-  {
-    "slug": "liangxing-lai-ai-work-20260527",
-    "name": "小興如何協助賴總工作｜從全通路到 AI 智慧服務",
-    "desc": "參考賈維斯既有良興/賴志達研究底稿，加入小興自己的工作判讀，整理小興協助賴總時的溝通原則、AI 協助模組、風險控管、驗收指標與 90 天落地路線。",
-    "source": "賈維斯 2026-05-13 良興/賴志達研究報告與來源清單；小興 2026-05-27 新版研究報告；良興官網、EcLife、CIO Taiwan、商周/經理人/DTA/awoo 等公開資料。",
-    "date": "2026-05-27",
-    "category": "良興 AI 策略",
-    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-lai-ai-work-20260527/",
-    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-lai-ai-work-20260527/liangxing-lai-ai-work-20260527.zip",
-    "note": "給賴總/良興團隊討論小興工作定位與 AI 智慧服務落地路線使用；不包含私人資料分析。"
-  },
-  {
-    "slug": "liangxing-july-campaign-202607",
-    "name": "良興 7 月活動企劃｜夏日換機・AI效率補給站",
-    "desc": "依良興網址列表與商品快取製作的 7 月兩線活動企劃修正版，補上手機可用的底部上一頁/下一頁控制列、標準頁尾、來源網站截圖、活動主題、線上/線下行銷架構、四大情境、素材節奏、KPI 與待確認事項；ZIP 內含 PPTX 與 Word 檔。",
-    "source": "良興網址列表 websites.html（EcLife 購物網、門市查詢、APP、會員中心、客服/售後、LINE、Facebook 等入口）+ 良興購物網商品快取 data/eclife_products_latest.ndjson（10000 筆，更新 2026-05-19）+ Jason/賴總 Telegram 指示。",
-    "date": "2026-05-25",
-    "category": "良興活動企劃",
-    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-july-campaign-202607/",
-    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-july-campaign-202607/liangxing-july-campaign-202607.zip",
-    "note": "7 月活動修正版｜已補上手機底部控制列與網址列表來源截圖；正式上線前需由良興確認主推商品、庫存、毛利與優惠規則。"
-  },
-  {
-    "slug": "liangxing-ai-marketing-system-20260525",
-    "name": "良興 AI 行銷內容與活動報告系統｜展示提案版 HTML PPT",
-    "desc": "將 Claude Cowork Plugin 原型升級為良興可交付的 AI 行銷中台展示版，包含商品資料治理、活動報告、歷史企劃參考、SEO/競品分析、內容工廠、導入路線圖與驗收標準。",
-    "source": "Jason 提供 DOCX：Claude Cowork Plugin 建置紀錄；良興購物網商品快取 data/eclife_products_latest.ndjson（10000 筆，更新 2026-05-19）；賈維斯分析整理。",
-    "date": "2026-05-25",
-    "category": "良興 AI 行銷",
-    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-ai-marketing-system-20260525/",
-    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/liangxing-ai-marketing-system-20260525/liangxing-ai-marketing-system-20260525.zip",
-    "note": "展示提案版｜可作為良興內部討論 AI 行銷內容、活動報告與 SEO 分析模組的第一版樣板。"
-  },
-  {
-    "slug": "google-io-2026-agentic-gemini-html-ppt-20260520",
-    "name": "Google I/O 2026｜Agentic Gemini Era 圖文版 HTML PPT",
-    "desc": "整理 Google I/O 2026 開發者大會重點，包含 Gemini 3.5、Gemini Omni、Antigravity 2.0、Google AI Studio、Android/Web agent-ready 工具、Search / Workspace / Shopping / XR 代理化，以及對企業與開發團隊的影響與行動建議。",
-    "source": "Google Blog、Google Developers Blog、Android Developers Blog、9to5Google 公開資料 + OpenClaw 繁中分析報告 `reports/google_io_2026_report_for_notebooklm.md`。",
-    "date": "2026-05-20",
-    "category": "AI 趨勢",
-    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/google-io-2026-agentic-gemini-html-ppt-20260520/",
-    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/google-io-2026-agentic-gemini-html-ppt-20260520/google-io-2026-agentic-gemini-html-ppt-20260520.zip",
-    "note": "圖文分析版｜適合快速了解 Google I/O 2026 的 AI agent 平台戰略、開發者工具趨勢與企業導入討論。"
-  },
-  {
-    "slug": "ai-national-power-html-ppt-20260517",
-    "name": "AI 的下一場戰爭｜從模型走向國力 HTML PPT",
-    "desc": "將原始 AI 趨勢圖往下一層深化，整理平台主權、AI 重工業、台灣供應鏈、AI 國安化、企業治理與 90 天落地路線圖，適合作為 AI 趨勢簡報或企業轉型開場。",
-    "source": "Jason 上傳 AI 趨勢圖片與對話分析整理；含原圖素材與 OpenClaw 產出之 HTML PPT。",
-    "date": "2026-05-17",
-    "category": "AI 趨勢",
-    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ai-national-power-html-ppt-20260517/",
-    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ai-national-power-html-ppt-20260517/ai-national-power-html-ppt-20260517.zip",
-    "note": "圖文趨勢版｜適合 AI 趨勢分享、企業 AI 轉型開場與內部策略討論；正式對外前建議補新聞來源核實。"
   },
   {
     "slug": "bnext-space-intelligence-html-ppt-visual",
@@ -98,15 +19,5 @@
     "category": "AI 趨勢",
     "url": "https://eclife-lianghsing.github.io/bnext-space-intelligence-html-ppt-visual/",
     "zip_url": "https://drive.google.com/file/d/13uwKHKGMj7lH5uVB2Dw5bsDgGSHF6nnb/view?usp=sharing"
-  },
-  {
-    "slug": "liangxing-omnichannel-html-ppt-visual",
-    "name": "良興全通路轉型個案｜圖文版 HTML PPT",
-    "desc": "以更視覺化的方式呈現良興全通路轉型個案，適合對外展示與快速瀏覽。",
-    "source": "Jason / OpenClaw 產出之 HTML PPT；公開 GitHub Pages 頁面驗證整理。",
-    "date": "2026-05-15",
-    "category": "企業個案",
-    "url": "https://eclife-lianghsing.github.io/liangxing-omnichannel-html-ppt-visual/",
-    "zip_url": "https://drive.google.com/file/d/1LbnbaNw1jUtc46OaRlCXphCLY3vT45Up/view?usp=sharing"
   }
 ]
