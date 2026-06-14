@@ -36,28 +36,27 @@
 .axis{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
 .axis .brief-card{min-height:220px}
 .mini{font-size:14px;color:var(--text-3)}
-.mobile-controls{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;display:flex;gap:8px;align-items:center;padding:8px;border:1px solid rgba(13,35,56,.14);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 18px 50px rgba(15,40,68,.18);backdrop-filter:blur(18px)}
-.mobile-controls button{border:1px solid rgba(13,35,56,.16);border-radius:999px;background:#fff;color:#16212b;padding:9px 13px;min-width:72px;font-weight:900;cursor:pointer;font-family:inherit}
-.mobile-controls b{display:block;font-size:14px}
-.mobile-controls small{display:block;font-size:10px;color:#66768a;font-weight:700}
+.mobile-controls{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;display:flex;gap:4px;align-items:center;width:min(900px,calc(100vw - 32px));min-height:46px;padding:5px 6px;border:1px solid rgba(13,35,56,.12);border-radius:999px;background:rgba(255,255,255,.9);box-shadow:0 12px 36px rgba(15,40,68,.16);backdrop-filter:blur(18px);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+.mobile-controls::-webkit-scrollbar{display:none}
+.mobile-controls button{flex:0 0 auto;border:1px solid rgba(13,35,56,.16);border-radius:999px;background:#fff;color:#16212b;padding:8px 10px;min-width:48px;font-weight:900;cursor:pointer;font-family:inherit;line-height:1}
+.mobile-controls b{display:block;font-size:13px;white-space:nowrap}
+.mobile-controls small{display:none}
 .mobile-controls .voice{background:var(--lh-red);color:#fff;border-color:var(--lh-red)}
 .control-progress{position:fixed;left:0;bottom:0;height:5px;width:12.5%;background:linear-gradient(90deg,var(--lh-red),var(--lh-gold));z-index:65}
 body.overview-open .mobile-controls{display:none}
 @media(max-width:760px){
   html,body{overflow-x:hidden}
   .deck,.slide{width:100vw!important;max-width:100vw!important;overflow-x:hidden!important}
-  .slide{padding:34px 24px 152px;overflow-y:auto}
+  .slide{padding:34px 24px 92px;overflow-y:auto}
   .h1{font-size:32px;max-width:100%;word-break:break-all;overflow-wrap:anywhere}.h2{font-size:30px}.quote{font-size:24px}
   .lede{max-width:calc(100vw - 72px);font-size:18px;overflow-wrap:anywhere}
   .cards.g2,.cards.g3,.axis,.timeline{grid-template-columns:1fr}
   .timeline{display:grid}.tl{border-right:0;border-bottom:1px solid var(--border)}
   .deck-footer{left:24px;right:24px}
-  .mobile-controls{left:8px;right:auto;width:calc(100vw - 96px);min-width:280px;max-width:360px;bottom:calc(18px + env(safe-area-inset-bottom));transform:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:6px;border-radius:18px;overflow:hidden}
-  .mobile-controls>*{min-width:0}
-  .mobile-controls button{min-width:0;width:100%;padding:8px 4px;overflow:hidden;white-space:nowrap}
-  .mobile-count{display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px}
-  .mobile-controls b{font-size:12px}
-  .mobile-controls small{display:none}
+  .mobile-controls{left:8px;right:8px;width:auto;min-width:0;max-width:none;bottom:calc(14px + env(safe-area-inset-bottom));transform:none;gap:3px;padding:5px;border-radius:999px}
+  .mobile-controls button{min-width:auto;padding:8px 7px}
+  .mobile-count{flex:0 0 auto;display:flex;align-items:center;justify-content:center;padding:0 6px;text-align:center;font-size:11px;color:#3d4a58;white-space:nowrap}
+  .mobile-controls b{font-size:11px}
 }
 </style>
 </head>
@@ -172,13 +171,13 @@ body.overview-open .mobile-controls{display:none}
 </div>
 <audio id="voiceTrack" preload="metadata" src="assets/narration.wav"></audio>
 <div class="mobile-controls" aria-label="簡報控制列">
-  <button type="button" class="mobile-prev"><b>上一頁</b><small>回到前一張</small></button>
+  <button type="button" class="mobile-prev"><b>上一頁</b><small>前一張</small></button>
   <span class="mobile-count">1 / 8</span>
-  <button type="button" class="mobile-next"><b>下一頁</b><small>繼續播放</small></button>
-  <button type="button" class="mobile-overview"><b>總覽</b><small>查看全部</small></button>
+  <button type="button" class="mobile-next"><b>下一頁</b><small>下一張</small></button>
+  <button type="button" class="mobile-overview"><b>總覽</b><small>全部</small></button>
   <button type="button" class="mobile-speaker"><b>講者</b><small>備註</small></button>
   <button type="button" class="mobile-full"><b>全螢幕</b><small>播放</small></button>
-  <button type="button" class="voice"><b>真人語音</b><small>播放/暫停</small></button>
+  <button type="button" class="voice"><b>語音</b><small>播放/暫停</small></button>
 </div>
 <div class="control-progress"></div>
 <script src="../assets/runtime.js"></script>
