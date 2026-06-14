@@ -7,6 +7,13 @@
     "language": "zh-TW",
     "basis": "YouTube watch page metadata, chapter list, and manually created zh-TW transcript fetched on 2026-06-14"
   },
+  "narration": {
+    "engine": "Microsoft Edge neural TTS",
+    "voice": "zh-TW-HsiaoChenNeural",
+    "rate": "-6%",
+    "file": "assets/narration.mp3",
+    "note": "Natural Taiwan Mandarin generated narration following the Wenwen/Jarvis human-voice workflow reference."
+  },
   "chapters": [
     {"time": "00:00", "title": "開場", "summary": "介紹落合陽一與 AI 時代的人類價值問題。"},
     {"time": "02:30", "title": "白領的終結", "summary": "AI 將動腦與基礎 coding 外包，entry-level 知識工作被重新定價。"},
@@ -17,7 +24,7 @@
   "deliverables": [
     "index.html",
     "infographic.html",
-    "assets/narration.wav",
+    "assets/narration.mp3",
     "narration.txt"
   ]
 }
