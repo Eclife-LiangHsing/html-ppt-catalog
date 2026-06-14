@@ -1,5 +1,18 @@
 [
   {
+    "slug": "ochiai-ai-forecast-20260614",
+    "name": "落合陽一 AI 預言｜白領、戰爭、日本與人類價值 HTML PPT",
+    "desc": "依 YouTube 影片繁中字幕整理的 AI 趨勢簡報，包含白領工作重估、實體 AI 與戰爭、日本少子化下的產業機會、KPI 組織轉型，以及良興團隊可討論的 AI agent 落地題。頁面內含繁中語音導覽與一頁式資訊圖表。",
+    "source": "YouTube 影片「日本天才落合：今年『這技能』將完全無用」繁中字幕、章節與影片描述；小興 2026-06-14 整理為 HTML PPT、資訊圖表與語音導覽。",
+    "date": "2026-06-14",
+    "category": "AI 趨勢",
+    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-forecast-20260614/",
+    "infographic_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-forecast-20260614/infographic.html",
+    "audio_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-forecast-20260614/assets/narration.wav",
+    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ochiai-ai-forecast-20260614/ochiai-ai-forecast-20260614.zip",
+    "note": "已補標準底部控制列、講者/總覽/全螢幕控制，以及繁中語音導覽。"
+  },
+  {
     "slug": "ochiai-ai-future-visual",
     "name": "落合陽一的 AI 未來預言｜白領終結、實體 AI 與日本機會",
     "desc": "依 Ben桑日本漫談 2026-06-11 影片整理，濃縮落合陽一對 AI 技術革命、白領工作、coding、實體 AI/國防、日本少子化與重工/IP、人類價值的核心觀點。",
