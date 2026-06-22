@@ -10,7 +10,7 @@
   "narration": {
     "engine": "Coqui XTTS v2 zero-shot voice cloning",
     "voice": "賴總授權聲音樣本",
-    "reference": "work/audio-transcripts/20260622-lai/voice-clone/lai-reference.wav",
+    "reference": "work/audio-transcripts/20260622-lai/james3-analysis/james3-lai-candidate.wav",
     "file": "assets/narration.mp3",
     "note": "AI synthetic voice generated from an authorized Lai voice sample; not a live human recording."
   },
