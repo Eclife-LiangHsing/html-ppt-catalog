@@ -1,0 +1,30 @@
+{
+  "title": "落合陽一 AI 預言：白領、戰爭、日本與人類價值",
+  "created_at": "2026-06-14",
+  "source_video": {
+    "url": "https://youtu.be/I6p3pz9h5JM?si=vpQjsqU4zjItphrD",
+    "title": "日本天才落合：今年「這技能」將完全無用❗️未來2種人才最吃香❓少子化是祝福，AI帶動日本2產業",
+    "language": "zh-TW",
+    "basis": "YouTube watch page metadata, chapter list, and manually created zh-TW transcript fetched on 2026-06-14"
+  },
+  "narration": {
+    "engine": "Coqui XTTS v2 zero-shot voice cloning",
+    "voice": "賴總授權聲音樣本",
+    "reference": "work/audio-transcripts/20260622-lai/voice-clone/lai-reference.wav",
+    "file": "assets/narration.mp3",
+    "note": "AI synthetic voice generated from an authorized Lai voice sample; not a live human recording."
+  },
+  "chapters": [
+    {"time": "00:00", "title": "開場", "summary": "介紹落合陽一與 AI 時代的人類價值問題。"},
+    {"time": "02:30", "title": "白領的終結", "summary": "AI 將動腦與基礎 coding 外包，entry-level 知識工作被重新定價。"},
+    {"time": "08:23", "title": "AI 與戰爭", "summary": "實體 AI、無人機、資料整合與自動化武器將改變國防。"},
+    {"time": "11:29", "title": "AI 時代的日本", "summary": "少子化缺工讓自動化成為補位；重工業與文化 IP 被視為日本機會。"},
+    {"time": "16:19", "title": "再見了智人", "summary": "KPI 型組織轉向共生、調律者、村長與緣分價值。"}
+  ],
+  "deliverables": [
+    "index.html",
+    "infographic.html",
+    "assets/narration.mp3",
+    "narration.txt"
+  ]
+}
