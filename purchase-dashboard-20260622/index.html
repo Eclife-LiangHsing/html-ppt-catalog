@@ -37,7 +37,7 @@
       <div class="card"><div class="label">期末庫存風險</div><div class="num" id="inventoryValue"></div><div class="hint" id="inventoryHint"></div></div>
     </section>
     <section class="grid">
-      <div class="card"><h2>達成率狀況（品牌/類別）</h2><div class="canvasBox"><canvas id="barChart"></canvas></div><div class="hint">藍色為業績占該採購員期間業績比重，桃紅為毛利占比；月目標匯入後可切換成正式達成率。</div></div>
+      <div class="card"><h2>達成率狀況（產品別）</h2><div class="canvasBox"><canvas id="barChart"></canvas></div><div class="hint">第二層產品別會依採購員自動抓主要高業績類別；月目標匯入後可切換成正式達成率。</div></div>
       <div class="card"><h2>品類動態與市場變數</h2><ul class="note" id="insights"></ul></div>
       <div class="card"><h2 class="pink">毛利異常</h2><table class="table"><thead><tr><th>採購員</th><th>品項</th><th>業績</th><th>毛利</th></tr></thead><tbody id="negativeRows"></tbody></table></div>
       <div class="card"><h2 class="pink">庫存異常</h2><table class="table"><thead><tr><th>採購員</th><th>品項</th><th>銷量</th><th>庫存</th></tr></thead><tbody id="stockRows"></tbody></table></div>
@@ -49,7 +49,6 @@
     const fmt = new Intl.NumberFormat('zh-TW');
     const money = v => fmt.format(Math.round(v || 0));
     const buyers = ['總覽', ...DATA.buyers.map(x => x['採購員']).filter(Boolean)];
-    const segments = ['全部', ...DATA.meta.segments];
     let state = { buyer: '總覽', segment: '全部' };
     let barChart, storeChart;
     document.getElementById('dateRange').textContent = DATA.meta.dates.join('、');
@@ -58,11 +57,15 @@
     function rowsFor(collection, buyer=state.buyer, segment=state.segment){
       return collection.filter(r => (buyer==='總覽'||r['採購員']===buyer) && (segment==='全部'||r.segment===segment));
     }
+    function currentSegments(){
+      const list = state.buyer === '總覽' ? DATA.overallProductTabs : (DATA.buyerProductTabs[state.buyer] || []);
+      return ['全部', ...list];
+    }
     function renderButtons(){
       const bt=document.getElementById('buyerTabs'); bt.innerHTML='';
-      buyers.forEach(b=>{const el=document.createElement('button'); el.textContent=b||'未填採購員'; el.className=b===state.buyer?'active':''; el.onclick=()=>{state.buyer=b; render()}; bt.appendChild(el)});
+      buyers.forEach(b=>{const el=document.createElement('button'); el.textContent=b||'未填採購員'; el.className=b===state.buyer?'active':''; el.onclick=()=>{state.buyer=b; state.segment='全部'; render()}; bt.appendChild(el)});
       const st=document.getElementById('segmentTabs'); st.innerHTML='';
-      segments.forEach(s=>{const el=document.createElement('button'); el.textContent=s; el.className=s===state.segment?'active':''; el.onclick=()=>{state.segment=s; render()}; st.appendChild(el)});
+      currentSegments().forEach(s=>{const el=document.createElement('button'); el.textContent=s; el.className=s===state.segment?'active':''; el.onclick=()=>{state.segment=s; render()}; st.appendChild(el)});
     }
     function renderKpi(){
       const latest=sumRows(rowsFor(DATA.latestSegment));
@@ -78,7 +81,8 @@
       document.getElementById('inventoryHint').textContent=state.buyer==='總覽'?'全採購員期末庫存金額':'期末庫存金額、庫存品項請搭配庫齡判讀';
     }
     function renderBar(){
-      const rows = rowsFor(DATA.segments, state.buyer, '全部').filter(r=>segments.includes(r.segment)).sort((a,b)=>b.sales-a.sales);
+      const allowed = currentSegments().filter(x=>x !== '全部');
+      const rows = rowsFor(DATA.segments, state.buyer, '全部').filter(r=>allowed.includes(r.segment)).sort((a,b)=>b.sales-a.sales);
       const baseSales = Math.max(1, rows.reduce((a,r)=>a+r.sales,0));
       const baseProfit = Math.max(1, rows.reduce((a,r)=>a+r.profit,0));
       const labels=rows.map(r=>r.segment), sales=rows.map(r=>+(r.sales/baseSales*100).toFixed(1)), profit=rows.map(r=>+(r.profit/baseProfit*100).toFixed(1));
@@ -86,12 +90,13 @@
       barChart=new Chart(document.getElementById('barChart'),{type:'bar',data:{labels,datasets:[{label:'業績占比 %',data:sales,backgroundColor:'#0b5b9d'},{label:'毛利占比 %',data:profit,backgroundColor:'#c0187d'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'}}},plugins:{legend:{position:'top'}}}});
     }
     function renderInsights(){
-      const top = rowsFor(DATA.segments, state.buyer, '全部').sort((a,b)=>b.sales-a.sales).slice(0,3);
+      const allowed = currentSegments().filter(x=>x !== '全部');
+      const top = rowsFor(DATA.segments, state.buyer, '全部').filter(r=>allowed.includes(r.segment)).sort((a,b)=>b.sales-a.sales).slice(0,3);
       const bad = rowsFor(DATA.segments, state.buyer, '全部').filter(r=>r.profit<0).slice(0,2);
       const list = [
         ...top.map(r=>`<li><span class="pill">${r.segment}</span> 期間業績 ${money(r.sales)}、毛利 ${money(r.profit)}，毛利率 ${r.marginRate ?? 0}%。</li>`),
         ...(bad.length?bad.map(r=>`<li><span class="bad">風險：</span>${r.segment} 毛利為負，需優先查促銷折讓、成本或回補入帳。</li>`):['<li><span class="good">目前篩選範圍未出現品牌/類別層級負毛利。</span></li>']),
-        '<li><span class="warn">下一步：</span>補入「採購員 × 品牌/類別 × 月目標」後，即可把占比圖改為正式累計達成率。</li>'
+        '<li><span class="warn">下一步：</span>補入「採購員 × 產品別 × 月目標」後，即可把占比圖改為正式累計達成率。</li>'
       ];
       document.getElementById('insights').innerHTML=list.join('');
     }
@@ -102,7 +107,8 @@
       document.getElementById('stockRows').innerHTML=stock.map(r=>`<tr><td>${r.buyer}</td><td><b>${r.code}</b><br>${r.name}<div class="hint">${r.segment}</div></td><td>${r.qty}</td><td class="bad">${r.stock}</td></tr>`).join('') || '<tr><td colspan="4">目前篩選範圍無庫存為 0 的已銷售品項</td></tr>';
     }
     function renderStore(){
-      const rows=DATA.storeDecline.filter(r=>state.segment==='全部'||r.segment===state.segment).slice(0,8);
+      const allowed = currentSegments().filter(x=>x !== '全部');
+      const rows=DATA.storeDecline.filter(r=>(state.segment==='全部' ? allowed.includes(r.segment) : r.segment===state.segment)).slice(0,8);
       document.getElementById('storeRows').innerHTML=rows.map(r=>`<tr><td>${r.store}</td><td>${r.segment}</td><td>${money(r.today)}</td><td>${money(r.priorAvg)}</td><td class="bad">${r.dropRate}%</td></tr>`).join('') || '<tr><td colspan="5">目前篩選範圍沒有明顯衰退門市</td></tr>';
       const daily = DATA.storeDaily.filter(r=>state.segment==='全部'||r.segment===state.segment);
       const byDate={}; daily.forEach(r=>{byDate[r['日期']]=(byDate[r['日期']]||0)+r.sales});
