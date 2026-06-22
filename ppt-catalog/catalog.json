@@ -1,5 +1,17 @@
 [
   {
+    "slug": "ai-talent-org-20260622",
+    "name": "AI 時代的人才與組織轉型｜YouTube 影片整理 HTML PPT",
+    "desc": "依 YouTube 影片繁中逐字稿整理的 9 頁簡報，聚焦 AI 對白領工作、實體 AI、日本產業機會、組織管理與未來人才能力的影響。",
+    "source": "YouTube 影片 https://youtu.be/I6p3pz9h5JM 的繁中字幕逐字稿與影片內容；2026-06-22 整理為 NotebookLM 來源稿、HTML PPT 與資訊圖表。",
+    "date": "2026-06-22",
+    "category": "AI 趨勢",
+    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ai-talent-org-20260622/",
+    "infographic_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ai-talent-org-20260622/infographic/",
+    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ai-talent-org-20260622/ai-talent-org-20260622-html-ppt.zip",
+    "note": "公開影片二次整理簡報；不含公司內部營運資料。Drive HTML 原始檔保留作下載，正式瀏覽以 GitHub Pages 連結為準。"
+  },
+  {
     "slug": "ochiai-ai-forecast-20260614",
     "name": "落合陽一 AI 預言｜白領、戰爭、日本與人類價值 HTML PPT",
     "desc": "依 YouTube 影片繁中字幕整理的 AI 趨勢簡報，包含白領工作重估、實體 AI 與戰爭、日本少子化下的產業機會、KPI 組織轉型，以及可討論的 AI agent 落地題。頁面內含繁中語音導覽與一頁式資訊圖表。",
