@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>良興採購銷售與庫存儀錶板</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="./data.js"></script>
+  <style>
+    :root{--blue:#0b5b9d;--sky:#eaf5ff;--cyan:#21a6c8;--pink:#c0187d;--ink:#26323f;--muted:#6a7786;--line:#dfe7ef;--bg:#f4f7fb;--warn:#b56b00;--bad:#b42318;--good:#0f7a4d}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",Arial,sans-serif}
+    .wrap{max-width:1440px;margin:0 auto;padding:16px}
+    .hero{background:linear-gradient(135deg,#064a82,#1477c6);color:#fff;border-radius:8px;padding:22px 28px;box-shadow:0 12px 30px rgba(6,74,130,.18)}
+    h1{margin:0 0 8px;font-size:26px;letter-spacing:0}.sub{font-size:14px;opacity:.9}.tabs,.chips{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+    button{border:1px solid var(--line);background:#fff;color:#25425f;border-radius:8px;padding:10px 18px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(35,55,80,.06)}
+    button.active{background:var(--blue);color:#fff;border-color:var(--blue)}.chips button{background:#e7f2fb;padding:8px 13px;font-size:14px}.chips button.active{background:#d8edf9;color:#034f86;border-color:#b7d7eb}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px;box-shadow:0 3px 12px rgba(45,63,85,.05)}
+    .label{font-size:13px;color:var(--muted);margin-bottom:10px}.num{font-size:28px;font-weight:800}.hint{font-size:13px;color:var(--muted);line-height:1.5;margin-top:6px}.good{color:var(--good)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.wide{grid-column:1/-1}.card h2{font-size:18px;margin:0 0 16px;border-left:5px solid var(--blue);padding-left:10px}.card h2.pink{border-left-color:var(--pink)}
+    .table{width:100%;border-collapse:collapse;font-size:13px}.table th{color:#526273;text-align:left;border-bottom:1px solid var(--line);padding:9px 8px}.table td{border-bottom:1px solid #edf1f5;padding:10px 8px;vertical-align:top}.table tr:last-child td{border-bottom:0}
+    .pill{display:inline-flex;align-items:center;border-radius:999px;background:#eef5fb;padding:4px 9px;font-weight:700;color:#155984}.note{line-height:1.8;color:#3f4d5d}.note li{margin-bottom:7px}.canvasBox{height:310px}.smallCanvas{height:250px}
+    @media(max-width:980px){.kpis,.grid{grid-template-columns:1fr}.hero{padding:18px}.num{font-size:23px}.wrap{padding:10px}button{padding:9px 12px}.canvasBox{height:260px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>良興股份有限公司｜採購銷售與庫存重點儀錶板</h1>
+      <div class="sub">資料來源：每日 A80 銷售資料 + 庫存結存資料｜目前原型期間：<span id="dateRange"></span>｜正式達成率需匯入月目標表</div>
+    </section>
+    <nav class="tabs" id="buyerTabs"></nav>
+    <nav class="chips" id="segmentTabs"></nav>
+    <section class="kpis">
+      <div class="card"><div class="label">當日業績</div><div class="num" id="todaySales"></div><div class="hint" id="todaySalesHint"></div></div>
+      <div class="card"><div class="label">當日毛利</div><div class="num" id="todayProfit"></div><div class="hint" id="todayProfitHint"></div></div>
+      <div class="card"><div class="label">期間累計</div><div class="num" id="periodSales"></div><div class="hint" id="periodHint"></div></div>
+      <div class="card"><div class="label">期末庫存風險</div><div class="num" id="inventoryValue"></div><div class="hint" id="inventoryHint"></div></div>
+    </section>
+    <section class="grid">
+      <div class="card"><h2>達成率狀況（品牌/類別）</h2><div class="canvasBox"><canvas id="barChart"></canvas></div><div class="hint">藍色為業績占該採購員期間業績比重，桃紅為毛利占比；月目標匯入後可切換成正式達成率。</div></div>
+      <div class="card"><h2>品類動態與市場變數</h2><ul class="note" id="insights"></ul></div>
+      <div class="card"><h2 class="pink">毛利異常</h2><table class="table"><thead><tr><th>採購員</th><th>品項</th><th>業績</th><th>毛利</th></tr></thead><tbody id="negativeRows"></tbody></table></div>
+      <div class="card"><h2 class="pink">庫存異常</h2><table class="table"><thead><tr><th>採購員</th><th>品項</th><th>銷量</th><th>庫存</th></tr></thead><tbody id="stockRows"></tbody></table></div>
+      <div class="card wide"><h2>門市異常與每日累計趨勢</h2><div class="smallCanvas"><canvas id="storeChart"></canvas></div><table class="table"><thead><tr><th>門市</th><th>品牌/類別</th><th>今日</th><th>前三日均</th><th>衰退</th></tr></thead><tbody id="storeRows"></tbody></table></div>
+    </section>
+  </main>
+  <script>
+    const DATA = window.DASHBOARD_DATA;
+    const fmt = new Intl.NumberFormat('zh-TW');
+    const money = v => fmt.format(Math.round(v || 0));
+    const buyers = ['總覽', ...DATA.buyers.map(x => x['採購員']).filter(Boolean)];
+    const segments = ['全部', ...DATA.meta.segments];
+    let state = { buyer: '總覽', segment: '全部' };
+    let barChart, storeChart;
+    document.getElementById('dateRange').textContent = DATA.meta.dates.join('、');
+
+    function sumRows(rows){return rows.reduce((a,r)=>({sales:a.sales+r.sales,profit:a.profit+r.profit,qty:a.qty+(r.qty||0),sku:a.sku+(r.sku||0)}),{sales:0,profit:0,qty:0,sku:0})}
+    function rowsFor(collection, buyer=state.buyer, segment=state.segment){
+      return collection.filter(r => (buyer==='總覽'||r['採購員']===buyer) && (segment==='全部'||r.segment===segment));
+    }
+    function renderButtons(){
+      const bt=document.getElementById('buyerTabs'); bt.innerHTML='';
+      buyers.forEach(b=>{const el=document.createElement('button'); el.textContent=b||'未填採購員'; el.className=b===state.buyer?'active':''; el.onclick=()=>{state.buyer=b; render()}; bt.appendChild(el)});
+      const st=document.getElementById('segmentTabs'); st.innerHTML='';
+      segments.forEach(s=>{const el=document.createElement('button'); el.textContent=s; el.className=s===state.segment?'active':''; el.onclick=()=>{state.segment=s; render()}; st.appendChild(el)});
+    }
+    function renderKpi(){
+      const latest=sumRows(rowsFor(DATA.latestSegment));
+      const period=sumRows(rowsFor(DATA.segments));
+      const inv=DATA.inventory.find(x=>x.buyer===state.buyer)||{};
+      document.getElementById('todaySales').textContent=money(latest.sales);
+      document.getElementById('todayProfit').textContent=money(latest.profit);
+      document.getElementById('periodSales').textContent=money(period.sales);
+      document.getElementById('inventoryValue').textContent=state.buyer==='總覽'?money(DATA.inventory.reduce((a,r)=>a+r.value,0)):money(inv.value||0);
+      document.getElementById('todaySalesHint').textContent=`${DATA.meta.latest}｜品項 ${latest.sku}、數量 ${latest.qty}`;
+      document.getElementById('todayProfitHint').innerHTML=`毛利率 <span class="${latest.profit<0?'bad':'good'}">${latest.sales?((latest.profit/latest.sales)*100).toFixed(1):'0.0'}%</span>`;
+      document.getElementById('periodHint').textContent=`${DATA.total.days} 日累計｜日均 ${money(period.sales/DATA.total.days)}；目標表匯入後顯示達成率`;
+      document.getElementById('inventoryHint').textContent=state.buyer==='總覽'?'全採購員期末庫存金額':'期末庫存金額、庫存品項請搭配庫齡判讀';
+    }
+    function renderBar(){
+      const rows = rowsFor(DATA.segments, state.buyer, '全部').filter(r=>segments.includes(r.segment)).sort((a,b)=>b.sales-a.sales);
+      const baseSales = Math.max(1, rows.reduce((a,r)=>a+r.sales,0));
+      const baseProfit = Math.max(1, rows.reduce((a,r)=>a+r.profit,0));
+      const labels=rows.map(r=>r.segment), sales=rows.map(r=>+(r.sales/baseSales*100).toFixed(1)), profit=rows.map(r=>+(r.profit/baseProfit*100).toFixed(1));
+      if(barChart) barChart.destroy();
+      barChart=new Chart(document.getElementById('barChart'),{type:'bar',data:{labels,datasets:[{label:'業績占比 %',data:sales,backgroundColor:'#0b5b9d'},{label:'毛利占比 %',data:profit,backgroundColor:'#c0187d'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'}}},plugins:{legend:{position:'top'}}}});
+    }
+    function renderInsights(){
+      const top = rowsFor(DATA.segments, state.buyer, '全部').sort((a,b)=>b.sales-a.sales).slice(0,3);
+      const bad = rowsFor(DATA.segments, state.buyer, '全部').filter(r=>r.profit<0).slice(0,2);
+      const list = [
+        ...top.map(r=>`<li><span class="pill">${r.segment}</span> 期間業績 ${money(r.sales)}、毛利 ${money(r.profit)}，毛利率 ${r.marginRate ?? 0}%。</li>`),
+        ...(bad.length?bad.map(r=>`<li><span class="bad">風險：</span>${r.segment} 毛利為負，需優先查促銷折讓、成本或回補入帳。</li>`):['<li><span class="good">目前篩選範圍未出現品牌/類別層級負毛利。</span></li>']),
+        '<li><span class="warn">下一步：</span>補入「採購員 × 品牌/類別 × 月目標」後，即可把占比圖改為正式累計達成率。</li>'
+      ];
+      document.getElementById('insights').innerHTML=list.join('');
+    }
+    function renderAnomalies(){
+      const neg=DATA.negativeMargin.filter(r=>state.buyer==='總覽'||r.buyer===state.buyer).slice(0,8);
+      document.getElementById('negativeRows').innerHTML=neg.map(r=>`<tr><td>${r.buyer}</td><td><b>${r.code}</b><br>${r.name}<div class="hint">${r.segment}</div></td><td>${money(r.sales)}</td><td class="bad">${money(r.profit)}</td></tr>`).join('') || '<tr><td colspan="4">目前篩選範圍無負毛利單品</td></tr>';
+      const stock=DATA.stockout.filter(r=>state.buyer==='總覽'||r.buyer===state.buyer).slice(0,8);
+      document.getElementById('stockRows').innerHTML=stock.map(r=>`<tr><td>${r.buyer}</td><td><b>${r.code}</b><br>${r.name}<div class="hint">${r.segment}</div></td><td>${r.qty}</td><td class="bad">${r.stock}</td></tr>`).join('') || '<tr><td colspan="4">目前篩選範圍無庫存為 0 的已銷售品項</td></tr>';
+    }
+    function renderStore(){
+      const rows=DATA.storeDecline.filter(r=>state.segment==='全部'||r.segment===state.segment).slice(0,8);
+      document.getElementById('storeRows').innerHTML=rows.map(r=>`<tr><td>${r.store}</td><td>${r.segment}</td><td>${money(r.today)}</td><td>${money(r.priorAvg)}</td><td class="bad">${r.dropRate}%</td></tr>`).join('') || '<tr><td colspan="5">目前篩選範圍沒有明顯衰退門市</td></tr>';
+      const daily = DATA.storeDaily.filter(r=>state.segment==='全部'||r.segment===state.segment);
+      const byDate={}; daily.forEach(r=>{byDate[r['日期']]=(byDate[r['日期']]||0)+r.sales});
+      if(storeChart) storeChart.destroy();
+      storeChart=new Chart(document.getElementById('storeChart'),{type:'line',data:{labels:DATA.meta.dates,datasets:[{label:'門市累計業績',data:DATA.meta.dates.map(d=>byDate[d]||0),borderColor:'#0b5b9d',backgroundColor:'rgba(11,91,157,.12)',fill:true,tension:.32}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>money(v)}}}}});
+    }
+    function render(){renderButtons();renderKpi();renderBar();renderInsights();renderAnomalies();renderStore()}
+    render();
+  </script>
+</body>
+</html>
