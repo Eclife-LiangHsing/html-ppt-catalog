@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="assets/base.css">
   <link rel="stylesheet" href="assets/animations.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260709-controls">
 </head>
 <body class="weather-brief">
 <div class="deck">
@@ -159,6 +159,47 @@
   </section>
 
 </div>
+<div class="mobile-controls" aria-label="簡報控制列">
+  <button type="button" class="mobile-prev"><b>上一頁</b><small>前一張</small></button>
+  <button type="button" class="mobile-overview"><b>總覽</b><small>全部</small></button>
+  <button type="button" class="mobile-speaker"><b>講者</b><small>備註</small></button>
+  <button type="button" class="mobile-full"><b>全螢幕</b><small>播放</small></button>
+  <span class="mobile-count">1 / 8</span>
+  <button type="button" class="mobile-next"><b>下一頁</b><small>下一張</small></button>
+</div>
+<div class="control-progress" aria-hidden="true"></div>
 <script src="assets/runtime.js"></script>
+<script>
+const slidesForControls = [...document.querySelectorAll('.slide')];
+const countEl = document.querySelector('.mobile-count');
+const progressEl = document.querySelector('.control-progress');
+function fireKey(key) {
+  document.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+}
+function currentIndex() {
+  const active = slidesForControls.findIndex(slide => slide.classList.contains('is-active') || slide.classList.contains('active'));
+  const hash = location.hash.match(/#\/?(\d+)/);
+  if (active >= 0) return active;
+  if (hash) return Math.max(0, Math.min(slidesForControls.length - 1, Number(hash[1]) - 1));
+  return 0;
+}
+function syncControls() {
+  const index = currentIndex();
+  countEl.textContent = (index + 1) + ' / ' + slidesForControls.length;
+  progressEl.style.width = ((index + 1) / slidesForControls.length * 100) + '%';
+  document.body.classList.toggle('overview-open', document.querySelector('.overview.open') !== null);
+}
+document.querySelector('.mobile-prev').onclick = () => fireKey('ArrowLeft');
+document.querySelector('.mobile-next').onclick = () => fireKey('ArrowRight');
+document.querySelector('.mobile-overview').onclick = () => fireKey('o');
+document.querySelector('.mobile-speaker').onclick = () => fireKey('n');
+document.querySelector('.mobile-full').onclick = () => {
+  if (document.fullscreenElement) document.exitFullscreen();
+  else document.documentElement.requestFullscreen?.();
+};
+window.addEventListener('hashchange', syncControls);
+setInterval(syncControls, 250);
+syncControls();
+</script>
 </body>
 </html>
