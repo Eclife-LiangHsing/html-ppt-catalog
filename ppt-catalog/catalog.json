@@ -1,15 +1,15 @@
 [
   {
     "slug": "ups-knowledge-article-20260709",
-    "name": "UPS 知識型文章（lihan 原版型重製版）",
-    "desc": "依 lihan 最新 UPS PDF 內容重製的原版型方向 HTML 圖文文章，保留白底、紅色短線標題、卡片、表格、商品卡與 FAQ，不套深色首屏。",
-    "source": "lihan 最新 UPS PDF 內容；小興 / eclifeclaw_bot 於 2026-07-09 依原版型方向重製為 HTML 離線包並提供完整目錄 zip；小良上架至 HTML 網頁列表入口。",
+    "name": "UPS 不斷電系統挑選指南",
+    "desc": "依 lihan 最新 UPS PDF 修正版重製的 UPS 圖文文章；開頭回到 PDF 單欄文字版型，移除右側商品 hero 圖，保留白底、紅色短線標題、卡片、表格、商品卡與 FAQ。",
+    "source": "lihan 最新 UPS PDF 修正版；小興 / eclifeclaw_bot 於 2026-07-09 依 PDF 單欄開頭版型重製為 HTML 離線包並提供完整目錄 zip；小良上架至 HTML 網頁列表入口。",
     "date": "2026-07-09",
     "category": "產品知識 / 良興內容",
     "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ups-knowledge-article-20260709/",
     "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ups-knowledge-article-20260709/ups-knowledge-article-20260709.zip",
     "source_zip_url": "https://drive.google.com/file/d/19zt4D2SNuOyUNjbJAYi1xjIVWpgyVXq8/view?usp=drivesdk",
-    "note": "公開知識型文章；含 scoped CSS .ecl-ups-article、7 張 HTML 圖片引用且皆在 images/ 內、5 題 FAQPage JSON-LD、CyberPower 1500VA / Eaton 5E1000LV / Eaton C1000F 商品內容；未掃到員工、業績或內部營運資料。"
+    "note": "公開知識型文章；含 scoped CSS .ecl-ups-article、6 張 HTML 圖片引用且皆在 images/ 內、首屏無右側商品 hero 圖、5 題 FAQPage JSON-LD、CyberPower 1500VA / Eaton 5E1000LV / Eaton C1000F 商品內容；未掃到員工、業績或內部營運資料。"
   },
   {
     "slug": "ai-talent-org-20260622",

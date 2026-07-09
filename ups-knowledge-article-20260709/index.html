@@ -38,15 +38,8 @@
 
     .ecl-ups-article .ecl-hero {
       background: linear-gradient(100deg, #fff3f4 0%, #f4f7fb 100%);
-      border-bottom: 1px solid var(--ecl-line);
-      padding: 34px 0 30px;
-    }
-
-    .ecl-ups-article .ecl-hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 330px;
-      gap: 28px;
-      align-items: center;
+      border: 1px solid #edf0f4;
+      padding: 34px 0 32px;
     }
 
     .ecl-ups-article .ecl-pill {
@@ -70,16 +63,9 @@
 
     .ecl-ups-article .ecl-lead {
       margin: 18px 0 0;
-      max-width: 760px;
+      max-width: 990px;
       font-size: 18px;
       color: #344050;
-    }
-
-    .ecl-ups-article .ecl-hero-img {
-      width: 100%;
-      display: block;
-      border-radius: 8px;
-      box-shadow: 0 14px 34px rgba(7, 24, 45, .16);
     }
 
     .ecl-ups-article section {
@@ -318,17 +304,12 @@
     }
 
     @media (max-width: 860px) {
-      .ecl-ups-article .ecl-hero-grid,
       .ecl-ups-article .ecl-card-grid,
       .ecl-ups-article .ecl-card-grid.four,
       .ecl-ups-article .ecl-media,
       .ecl-ups-article .ecl-img-row,
       .ecl-ups-article .ecl-products {
         grid-template-columns: 1fr;
-      }
-
-      .ecl-ups-article .ecl-hero-img {
-        max-width: 420px;
       }
 
       .ecl-ups-article table {
@@ -342,13 +323,10 @@
 <body>
   <article class="ecl-ups-article">
     <header class="ecl-hero">
-      <div class="ecl-wrap ecl-hero-grid">
-        <div>
-          <div class="ecl-pill">UPS 不斷電系統挑選指南</div>
-          <h1>停電 5 分鐘就可能救回整台電腦？UPS 怎麼挑、能撐多久、NAS 和監控怎麼配一次看懂</h1>
-          <p class="ecl-lead">很多人買 UPS，不是因為想研究電力規格，而是某次跳電後，電腦檔案沒存、NAS 警告狂響、監控主機重開，才發現「原來幾秒鐘的斷電也很傷」。UPS 不只是備用電池，它更像設備的安全氣囊，平常幫你穩住電壓，出事時幫你爭取安全關機時間。</p>
-        </div>
-        <img class="ecl-hero-img" src="images/hero-cyberpower-ups.jpg" alt="CyberPower UPS 不斷電系統">
+      <div class="ecl-wrap">
+        <div class="ecl-pill">UPS 不斷電系統挑選指南</div>
+        <h1>停電 5 分鐘就可能救回整台電腦？UPS 怎麼挑、能撐多久、NAS 和監控怎麼配一次看懂</h1>
+        <p class="ecl-lead">很多人買 UPS，不是因為想研究電力規格，而是某次跳電後，電腦檔案沒存、NAS 警告狂響、監控主機重開，才發現「原來幾秒鐘的斷電也很傷」。UPS 不只是備用電池，它更像設備的安全氣囊，平常幫你穩住電壓，出事時幫你爭取安全關機時間。</p>
       </div>
     </header>
 
