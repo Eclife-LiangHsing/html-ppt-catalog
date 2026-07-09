@@ -1,5 +1,17 @@
 [
   {
+    "slug": "ups-knowledge-article-20260709",
+    "name": "UPS 知識型文章",
+    "desc": "以圖文網頁方式整理 UPS 不斷電系統選購概念、備援時間估算、常見架構、使用情境與良興推薦商品，適合群組直接預覽與分享。",
+    "source": "小興 / eclifeclaw_bot 於 2026-07-09 製作並提供完整目錄 zip；小良上架至 HTML 網頁列表入口。",
+    "date": "2026-07-09",
+    "category": "產品知識 / 良興內容",
+    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ups-knowledge-article-20260709/",
+    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ups-knowledge-article-20260709/ups-knowledge-article-20260709.zip",
+    "source_zip_url": "https://drive.google.com/file/d/1yldQ1P0z0O0XzzKuMvipFkRd2G6Sxw8I/view?usp=drivesdk",
+    "note": "公開知識型文章；包含良興公開商品頁連結與商品圖，未掃到員工、業績或內部營運資料。"
+  },
+  {
     "slug": "ai-talent-org-20260622",
     "name": "AI 時代的人才與組織轉型｜YouTube 影片整理 HTML PPT",
     "desc": "依 YouTube 影片繁中逐字稿整理的 9 頁簡報，聚焦 AI 對白領工作、實體 AI、日本產業機會、組織管理與未來人才能力的影響。",
