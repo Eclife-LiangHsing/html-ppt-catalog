@@ -1,5 +1,16 @@
 [
   {
+    "slug": "taiwan-typhoon-weather-brief-20260709",
+    "name": "臺灣一週天氣與巴威颱風簡報",
+    "desc": "整理 2026-07-09 傍晚臺灣一週天氣與巴威颱風資訊的 8 頁 HTML PPT，重點包含颱風現況、7/10-7/16 時間軸、區域風雨風險、城市預報、海象風浪與門市/物流行動建議。",
+    "source": "中央氣象署 1 週預報與颱風消息，並交叉參考中央社與 Taipei Times 於 2026-07-09 的公開天氣報導。",
+    "date": "2026-07-09",
+    "category": "天氣 / 公開資料",
+    "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/taiwan-typhoon-weather-brief-20260709/",
+    "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/taiwan-typhoon-weather-brief-20260709/taiwan-typhoon-weather-brief-20260709.zip",
+    "note": "公開天氣資料整理；不含公司員工姓名、業績、庫存、採購或內部營運資料。"
+  },
+  {
     "slug": "ups-knowledge-article-20260709",
     "name": "UPS 不斷電系統挑選指南",
     "desc": "依 lihan 最新 UPS PDF 修正版重製的 UPS 圖文文章；開頭回到 PDF 單欄文字版型，移除右側商品 hero 圖，保留白底、紅色短線標題、卡片、表格、商品卡與 FAQ。",
