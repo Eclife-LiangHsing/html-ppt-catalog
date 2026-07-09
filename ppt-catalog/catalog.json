@@ -1,15 +1,15 @@
 [
   {
     "slug": "ups-knowledge-article-20260709",
-    "name": "UPS 知識型文章（依 lihan PDF 內容重製 HTML）",
-    "desc": "依 lihan 提供 PDF 內容重製的 UPS 圖文知識文章，整理不斷電系統選購概念、備援時間估算、AVR 穩壓、電池維護、使用情境與良興推薦商品。",
-    "source": "lihan PDF 內容；小興 / eclifeclaw_bot 於 2026-07-09 重製為 HTML 離線包並提供完整目錄 zip；小良上架至 HTML 網頁列表入口。",
+    "name": "UPS 知識型文章（lihan 原版型重製版）",
+    "desc": "依 lihan 最新 UPS PDF 內容重製的原版型方向 HTML 圖文文章，保留白底、紅色短線標題、卡片、表格、商品卡與 FAQ，不套深色首屏。",
+    "source": "lihan 最新 UPS PDF 內容；小興 / eclifeclaw_bot 於 2026-07-09 依原版型方向重製為 HTML 離線包並提供完整目錄 zip；小良上架至 HTML 網頁列表入口。",
     "date": "2026-07-09",
     "category": "產品知識 / 良興內容",
     "url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ups-knowledge-article-20260709/",
     "zip_url": "https://eclife-lianghsing.github.io/html-ppt-catalog/ups-knowledge-article-20260709/ups-knowledge-article-20260709.zip",
-    "source_zip_url": "https://drive.google.com/file/d/1V0PW02rX2tf_yBRfpb5-A-BNag2yURXe/view?usp=drivesdk",
-    "note": "公開知識型文章；含 scoped CSS .ecl-ups-article、6 個 HTML 圖片引用與 hero 背景圖、5 題 FAQPage JSON-LD、CyberPower 1500VA / Eaton 5E1000LV / Eaton C1000F 商品連結；未掃到員工、業績或內部營運資料。"
+    "source_zip_url": "https://drive.google.com/file/d/19zt4D2SNuOyUNjbJAYi1xjIVWpgyVXq8/view?usp=drivesdk",
+    "note": "公開知識型文章；含 scoped CSS .ecl-ups-article、7 張 HTML 圖片引用且皆在 images/ 內、5 題 FAQPage JSON-LD、CyberPower 1500VA / Eaton 5E1000LV / Eaton C1000F 商品內容；未掃到員工、業績或內部營運資料。"
   },
   {
     "slug": "ai-talent-org-20260622",

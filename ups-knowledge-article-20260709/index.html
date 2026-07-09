@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>停電 5 分鐘就可能毀掉整台 NAS？UPS 怎麼選、能撐多久一次看懂</title>
-  <meta name="description" content="UPS 不只是停電備用電池，更是保護電腦、NAS、伺服器與監控設備的最後一道防線。看懂 VA、W、備援時間、AVR、純正弦波與適用情境。">
+  <title>停電 5 分鐘就可能救回整台電腦？UPS 怎麼挑、能撐多久、NAS 和監控怎麼配一次看懂</title>
+  <meta name="description" content="UPS 不只是備用電池，而是設備的安全氣囊。看懂 VA、W、備援時間、AVR、純正弦波、LCD、可換電池，以及 NAS、監控、工作站怎麼選。">
   <style>
     .ecl-ups-article {
-      --ink: #0d1b2f;
-      --muted: #536274;
-      --line: #dfe6ee;
-      --soft: #f6f8fb;
-      --panel: #ffffff;
-      --brand: #d81921;
-      --brand-dark: #a70f16;
-      --blue: #005bac;
-      --amber: #f59e0b;
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
-      line-height: 1.9;
+      --ecl-red: #df1720;
+      --ecl-blue: #004b93;
+      --ecl-ink: #07182d;
+      --ecl-text: #1d2733;
+      --ecl-muted: #5d6875;
+      --ecl-line: #dfe5ec;
+      --ecl-soft: #f6f8fb;
+      --ecl-warm: #f7f3ed;
+      width: 100%;
+      color: var(--ecl-text);
       background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      line-height: 1.85;
     }
 
     .ecl-ups-article * {
@@ -30,218 +30,192 @@
       color: inherit;
     }
 
-    .ecl-ups-article .wrap {
-      width: min(1120px, calc(100% - 32px));
+    .ecl-ups-article .ecl-wrap {
+      max-width: 1080px;
       margin: 0 auto;
+      padding: 0 18px;
     }
 
-    .ecl-ups-article .hero {
-      background:
-        linear-gradient(120deg, rgba(8, 18, 34, .94), rgba(13, 31, 55, .82)),
-        url("images/hero-cyberpower-ups.jpg") center right / contain no-repeat,
-        #0b1728;
-      color: #fff;
-      padding: 56px 0 46px;
-      overflow: hidden;
+    .ecl-ups-article .ecl-hero {
+      background: linear-gradient(100deg, #fff3f4 0%, #f4f7fb 100%);
+      border-bottom: 1px solid var(--ecl-line);
+      padding: 34px 0 30px;
     }
 
-    .ecl-ups-article .hero-inner {
-      min-height: 420px;
+    .ecl-ups-article .ecl-hero-grid {
       display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 28px;
       align-items: center;
-      grid-template-columns: minmax(0, 1fr) 360px;
-      gap: 36px;
     }
 
-    .ecl-ups-article .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 18px;
-      color: #ffd6d8;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0;
-    }
-
-    .ecl-ups-article .eyebrow::before,
-    .ecl-ups-article .section-title::before {
-      content: "";
-      width: 40px;
-      height: 4px;
-      border-radius: 999px;
-      background: var(--brand);
+    .ecl-ups-article .ecl-pill {
       display: inline-block;
-      flex: 0 0 auto;
+      margin-bottom: 14px;
+      padding: 7px 18px;
+      border-radius: 999px;
+      background: var(--ecl-red);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
     }
 
     .ecl-ups-article h1 {
       margin: 0;
-      max-width: 740px;
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1.14;
+      color: var(--ecl-ink);
+      font-size: clamp(31px, 4.6vw, 46px);
+      line-height: 1.28;
       letter-spacing: 0;
     }
 
-    .ecl-ups-article .lead {
+    .ecl-ups-article .ecl-lead {
+      margin: 18px 0 0;
       max-width: 760px;
-      margin: 22px 0 0;
-      color: #e8eef7;
-      font-size: 20px;
-      line-height: 1.75;
-    }
-
-    .ecl-ups-article .hero-points {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 28px;
-      max-width: 820px;
-    }
-
-    .ecl-ups-article .hero-point {
-      border: 1px solid rgba(255, 255, 255, .18);
-      background: rgba(255, 255, 255, .08);
-      padding: 14px 16px;
-      border-radius: 8px;
-      min-height: 94px;
-    }
-
-    .ecl-ups-article .hero-point strong {
-      display: block;
-      color: #fff;
       font-size: 18px;
-      margin-bottom: 4px;
+      color: #344050;
     }
 
-    .ecl-ups-article .hero-point span {
-      color: #cbd7e7;
-      font-size: 15px;
-      line-height: 1.6;
+    .ecl-ups-article .ecl-hero-img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 14px 34px rgba(7, 24, 45, .16);
     }
 
     .ecl-ups-article section {
-      padding: 46px 0;
-      border-bottom: 1px solid var(--line);
+      padding: 34px 0;
+      border-bottom: 1px solid var(--ecl-line);
     }
 
-    .ecl-ups-article .section-title {
+    .ecl-ups-article .ecl-title {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin: 0 0 18px;
-      font-size: clamp(25px, 3vw, 34px);
+      margin: 0 0 16px;
+      color: var(--ecl-ink);
+      font-size: clamp(25px, 3vw, 31px);
       line-height: 1.35;
       letter-spacing: 0;
     }
 
+    .ecl-ups-article .ecl-title::before {
+      content: "";
+      width: 42px;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--ecl-red);
+      flex: 0 0 auto;
+    }
+
     .ecl-ups-article p {
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       font-size: 18px;
     }
 
-    .ecl-ups-article .muted {
-      color: var(--muted);
-    }
-
-    .ecl-ups-article .grid-3,
-    .ecl-ups-article .grid-4 {
+    .ecl-ups-article .ecl-card-grid {
       display: grid;
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .ecl-ups-article .grid-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
     }
 
-    .ecl-ups-article .grid-4 {
+    .ecl-ups-article .ecl-card-grid.four {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .ecl-ups-article .info-card,
-    .ecl-ups-article .faq-card {
-      border: 1px solid var(--line);
+    .ecl-ups-article .ecl-card {
+      border: 1px solid var(--ecl-line);
       border-radius: 8px;
-      background: var(--panel);
-      padding: 22px;
-      box-shadow: 0 10px 28px rgba(13, 27, 47, .06);
+      background: #fff;
+      padding: 18px 18px 19px;
+      min-height: 126px;
     }
 
-    .ecl-ups-article .info-card h3,
-    .ecl-ups-article .faq-card h3 {
-      margin: 0 0 10px;
-      color: #002d5c;
-      font-size: 21px;
+    .ecl-ups-article .ecl-card.tinted {
+      background: var(--ecl-warm);
+    }
+
+    .ecl-ups-article .ecl-card h3 {
+      margin: 0 0 8px;
+      color: var(--ecl-blue);
+      font-size: 20px;
       line-height: 1.45;
     }
 
-    .ecl-ups-article .info-card p,
-    .ecl-ups-article .faq-card p {
+    .ecl-ups-article .ecl-card p {
       margin: 0;
       font-size: 17px;
     }
 
-    .ecl-ups-article .formula {
-      margin: 24px 0;
-      background: #101a2c;
+    .ecl-ups-article .ecl-formula {
+      margin: 20px 0;
+      padding: 18px 20px;
+      border-radius: 6px;
+      background: #10192b;
       color: #fff;
-      border-radius: 8px;
-      padding: 22px;
       text-align: center;
-      font-weight: 900;
       font-size: 20px;
+      font-weight: 900;
     }
 
-    .ecl-ups-article .note {
-      margin: 20px 0 0;
-      border: 1px solid #f6c66f;
-      border-left: 6px solid var(--amber);
+    .ecl-ups-article .ecl-note {
+      margin: 18px 0 0;
+      padding: 16px 18px;
+      border: 1px solid #f4bd66;
+      border-left: 5px solid #f59e0b;
+      border-radius: 6px;
       background: #fff8ea;
-      border-radius: 8px;
-      padding: 18px 20px;
       font-size: 17px;
     }
 
-    .ecl-ups-article .media-row {
+    .ecl-ups-article .ecl-media {
       display: grid;
-      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-      gap: 28px;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 22px;
       align-items: center;
-      margin-top: 24px;
+      margin: 18px 0 0;
     }
 
-    .ecl-ups-article .media-row img {
+    .ecl-ups-article .ecl-media img,
+    .ecl-ups-article .ecl-img-row img {
       width: 100%;
       display: block;
+      border: 1px solid var(--ecl-line);
       border-radius: 8px;
-      border: 1px solid var(--line);
       background: #fff;
+    }
+
+    .ecl-ups-article .ecl-img-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
     }
 
     .ecl-ups-article table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 18px;
-      font-size: 17px;
+      margin-top: 14px;
       background: #fff;
+      font-size: 17px;
     }
 
     .ecl-ups-article th,
     .ecl-ups-article td {
-      border: 1px solid var(--line);
-      padding: 14px 16px;
-      vertical-align: top;
+      border: 1px solid var(--ecl-line);
+      padding: 13px 14px;
       text-align: left;
+      vertical-align: top;
     }
 
     .ecl-ups-article th {
-      background: #f0f4f9;
+      background: #f0f3f7;
+      color: var(--ecl-ink);
       font-weight: 900;
     }
 
     .ecl-ups-article ul {
-      margin: 14px 0 0;
+      margin: 10px 0 0;
       padding-left: 22px;
       font-size: 18px;
     }
@@ -250,106 +224,111 @@
       margin: 8px 0;
     }
 
-    .ecl-ups-article .product-grid {
+    .ecl-ups-article .ecl-products {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
-      margin-top: 24px;
+      margin-top: 18px;
     }
 
-    .ecl-ups-article .product-card {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid var(--line);
+    .ecl-ups-article .ecl-product {
+      border: 1px solid var(--ecl-line);
       border-radius: 8px;
       overflow: hidden;
       background: #fff;
-      box-shadow: 0 12px 34px rgba(13, 27, 47, .08);
       text-decoration: none;
-      min-height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
-    .ecl-ups-article .product-card img {
+    .ecl-ups-article .ecl-product img {
       width: 100%;
       aspect-ratio: 4 / 3;
       object-fit: cover;
-      background: #f7f8fa;
-      border-bottom: 1px solid var(--line);
+      background: var(--ecl-soft);
+      border-bottom: 1px solid var(--ecl-line);
     }
 
-    .ecl-ups-article .product-body {
-      padding: 20px;
+    .ecl-ups-article .ecl-product-body {
+      padding: 17px;
+      flex: 1;
       display: flex;
       flex-direction: column;
-      flex: 1;
     }
 
-    .ecl-ups-article .tag {
-      display: inline-flex;
+    .ecl-ups-article .ecl-tag {
+      display: inline-block;
       width: fit-content;
+      margin-bottom: 12px;
+      padding: 4px 12px;
+      border-radius: 999px;
       background: #111;
       color: #fff;
-      border-radius: 999px;
-      padding: 4px 12px;
       font-size: 14px;
-      font-weight: 800;
-      margin-bottom: 12px;
+      font-weight: 900;
     }
 
-    .ecl-ups-article .product-card h3 {
-      margin: 0 0 10px;
-      font-size: 24px;
+    .ecl-ups-article .ecl-product h3 {
+      margin: 0 0 8px;
+      color: var(--ecl-ink);
+      font-size: 23px;
       line-height: 1.35;
     }
 
-    .ecl-ups-article .product-card p {
-      margin: 0 0 18px;
+    .ecl-ups-article .ecl-product p {
+      margin: 0 0 16px;
       font-size: 17px;
-      color: var(--muted);
+      color: var(--ecl-muted);
     }
 
-    .ecl-ups-article .btn {
-      margin-top: auto;
+    .ecl-ups-article .ecl-button {
       display: block;
-      text-align: center;
-      background: var(--brand);
-      color: #fff;
+      margin-top: auto;
+      padding: 12px 14px;
       border-radius: 6px;
-      padding: 12px 16px;
+      background: var(--ecl-red);
+      color: #fff;
+      text-align: center;
       font-weight: 900;
-      text-decoration: none;
     }
 
-    .ecl-ups-article .faq-list {
+    .ecl-ups-article .ecl-faq {
       display: grid;
       gap: 14px;
-      margin-top: 20px;
+      margin-top: 16px;
+    }
+
+    .ecl-ups-article .ecl-faq-item {
+      border: 1px solid var(--ecl-line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px;
+    }
+
+    .ecl-ups-article .ecl-faq-item h3 {
+      margin: 0 0 8px;
+      color: var(--ecl-blue);
+      font-size: 21px;
+      line-height: 1.45;
+    }
+
+    .ecl-ups-article .ecl-faq-item p {
+      margin: 0;
+      font-size: 17px;
     }
 
     @media (max-width: 860px) {
-      .ecl-ups-article .hero {
-        background:
-          linear-gradient(120deg, rgba(8, 18, 34, .94), rgba(13, 31, 55, .86)),
-          url("images/hero-cyberpower-ups.jpg") bottom right / 78% auto no-repeat,
-          #0b1728;
-      }
-
-      .ecl-ups-article .hero-inner {
-        min-height: 520px;
-        grid-template-columns: 1fr;
-        align-items: start;
-      }
-
-      .ecl-ups-article .hero-points,
-      .ecl-ups-article .grid-3,
-      .ecl-ups-article .grid-4,
-      .ecl-ups-article .media-row,
-      .ecl-ups-article .product-grid {
+      .ecl-ups-article .ecl-hero-grid,
+      .ecl-ups-article .ecl-card-grid,
+      .ecl-ups-article .ecl-card-grid.four,
+      .ecl-ups-article .ecl-media,
+      .ecl-ups-article .ecl-img-row,
+      .ecl-ups-article .ecl-products {
         grid-template-columns: 1fr;
       }
 
-      .ecl-ups-article .hero-point {
-        min-height: auto;
+      .ecl-ups-article .ecl-hero-img {
+        max-width: 420px;
       }
 
       .ecl-ups-article table {
@@ -362,90 +341,60 @@
 </head>
 <body>
   <article class="ecl-ups-article">
-    <header class="hero">
-      <div class="wrap hero-inner">
+    <header class="ecl-hero">
+      <div class="ecl-wrap ecl-hero-grid">
         <div>
-          <div class="eyebrow">UPS 選購指南</div>
-          <h1>停電 5 分鐘就可能毀掉整台 NAS？UPS 怎麼選、能撐多久一次看懂</h1>
-          <p class="lead">UPS 不是買來讓你撐一整天，而是幫電腦、NAS、伺服器和網路設備爭取最關鍵的 5 到 30 分鐘。這段時間足夠你存檔、關機，或讓設備自動安全停機。</p>
-          <div class="hero-points">
-            <div class="hero-point"><strong>防瞬斷</strong><span>電燈閃一下，設備不用跟著重開。</span></div>
-            <div class="hero-point"><strong>穩電壓</strong><span>AVR 自動穩壓降低電壓波動影響。</span></div>
-            <div class="hero-point"><strong>保資料</strong><span>NAS 與伺服器可爭取安全關機時間。</span></div>
-          </div>
+          <div class="ecl-pill">UPS 不斷電系統挑選指南</div>
+          <h1>停電 5 分鐘就可能救回整台電腦？UPS 怎麼挑、能撐多久、NAS 和監控怎麼配一次看懂</h1>
+          <p class="ecl-lead">很多人買 UPS，不是因為想研究電力規格，而是某次跳電後，電腦檔案沒存、NAS 警告狂響、監控主機重開，才發現「原來幾秒鐘的斷電也很傷」。UPS 不只是備用電池，它更像設備的安全氣囊，平常幫你穩住電壓，出事時幫你爭取安全關機時間。</p>
         </div>
+        <img class="ecl-hero-img" src="images/hero-cyberpower-ups.jpg" alt="CyberPower UPS 不斷電系統">
       </div>
     </header>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">先講結論：UPS 買來不是讓你撐一整天</h2>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">先講結論：UPS 買來不是讓你撐一整天</h2>
         <p>一般家用與辦公室 UPS 的核心任務，不是停電後讓你繼續工作一整天，而是爭取 5 到 30 分鐘的黃金時間。這段時間可以讓你存檔、關機，讓 NAS 停止寫入資料，或讓伺服器、監控主機依照設定自動安全關機。</p>
         <p>換句話說，UPS 的價值不是「電池有多大」而已，而是它能不能避免硬斷電、能不能穩定輸出、能不能和你的設備搭配。對一般電腦來說，它救的是正在處理的檔案；對 NAS 和伺服器來說，它救的是硬碟、檔案系統和資料完整性；對監控或網路設備來說，它救的是停電當下仍要持續運作的服務。</p>
-
-        <div class="grid-3">
-          <div class="info-card">
-            <h3>電腦 / 工作站</h3>
-            <p>重點是避免瞬斷、存檔與安全關機，建議保留容量餘裕。</p>
-          </div>
-          <div class="info-card">
-            <h3>NAS / 伺服器</h3>
-            <p>重點是純正弦波、USB 通訊、自動關機與穩定供電。</p>
-          </div>
-          <div class="info-card">
-            <h3>網路 / 監控</h3>
-            <p>耗電較低，搭配合適容量可以撐比較久，維持連線與錄影。</p>
-          </div>
+        <div class="ecl-card-grid">
+          <div class="ecl-card"><h3>電腦 / 工作站</h3><p>重點是避免瞬斷、存檔、安全關機，建議保留容量餘裕。</p></div>
+          <div class="ecl-card"><h3>NAS / 伺服器</h3><p>重點是純正弦波、USB 通訊、自動關機與穩定供電。</p></div>
+          <div class="ecl-card"><h3>網路 / 監控</h3><p>耗電較低，搭配適合容量可以撐比較久，維持連線與錄影。</p></div>
         </div>
       </div>
     </section>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">備援時間怎麼算？先看 W，不要只看 VA</h2>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">備援時間怎麼算？先看 W，不要只看 VA</h2>
         <p>UPS 規格常看到 1000VA、1500VA，但挑選時不能只看 VA。比較接近設備實際耗電的是 W，也就是瓦數。舉例來說，有些 1000VA UPS 可承載 600W，有些可承載 800W；如果你接的設備總耗電已經接近 UPS 的 W 上限，備援時間會很短，也更容易過載。</p>
-
-        <div class="formula">粗估備援時間：電池 Wh × 轉換效率 ÷ 設備總瓦數 W = 可撐時間（小時）</div>
-
+        <div class="ecl-formula">粗估備援時間：電池 Wh × 轉換效率 ÷ 設備總瓦數 W = 可撐時間（小時）</div>
         <p>假設路由器 12W、光纖數據機 10W、NAS 約 35W，總耗電約 57W。如果 UPS 可用電池能量約 100Wh，轉換效率抓 80%，大約可撐 100 × 0.8 ÷ 57 = 1.4 小時。這就是為什麼低耗電網路設備接 UPS，常常可以撐比較久。</p>
         <p>但如果換成桌機 300W、螢幕 30W，總耗電 330W，同樣的電池能量可能只剩十幾分鐘。若是工作站、伺服器、電競主機、外接硬碟很多的 NAS，負載更高，備援時間還會再縮短。實務上建議設備總瓦數不要貼著 UPS 上限跑，最好保留 20% 到 30% 空間。</p>
-
-        <div class="note">備援時間不是線性計算，電池老化、環境溫度、負載高低、功率因數與 UPS 設計都會影響結果。上稿或選購時可以用公式說明概念，實際規格仍應以原廠 runtime chart 或現場測試為準。</div>
+        <div class="ecl-note">備援時間不是線性計算，電池老化、環境溫度、負載高低、功率因數、UPS 設計都會影響結果。上稿或選購時可以用公式說明概念，實際規格仍應以原廠 runtime chart 或現場測試為準。</div>
       </div>
     </section>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">最常見的痛點：不是大停電，而是小瞬斷</h2>
-        <p>第一個痛點是瞬間跳電。很多辦公室不是每天大停電，而是偶爾閃一下、跳一下。人可能只覺得燈閃一下，但桌機已經重開，NAS 還在寫入資料，監控主機正在錄影。這種「看起來很小」的瞬斷，對資料反而很麻煩。</p>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">最常見的痛點：不是大停電，而是小瞬斷</h2>
+        <p>第一個痛點是瞬間跳電。很多辦公室不是每天大停電，而是偶爾閃一下、跳一下。人可能只覺得燈閃一下，但桌機已經重開、NAS 還在寫入資料、監控主機正在錄影。這種「看起來很小」的瞬斷，對資料反而很麻煩。</p>
         <p>第二個痛點是電壓不穩。冷氣、冰箱、馬達或大型設備啟動時，電壓可能瞬間下陷；雷雨天或線路狀況不好時，也可能出現突波。在線互動式 UPS 常搭配 AVR 自動穩壓，能減少設備長期承受電壓波動。</p>
-
-        <div class="media-row">
-          <img src="images/avr-wave.jpg" alt="AVR 自動穩壓示意圖">
-          <div>
-            <h3>AVR 自動穩壓</h3>
-            <p>AVR 自動穩壓可降低電壓波動對設備造成的影響。對家用電腦、門市收銀、辦公室網路設備和 NAS 來說，這類保護通常比單純延長幾分鐘備援時間更有感。</p>
-          </div>
+        <div class="ecl-media">
+          <img src="images/avr-wave.jpg" alt="AVR 自動穩壓">
+          <p><strong>AVR 自動穩壓</strong>可降低電壓波動對設備造成的影響。對家用電腦、門市 POS、辦公室網路設備、NAS 和監控主機來說，這類保護通常比單純延長幾分鐘備援時間更有感。</p>
         </div>
       </div>
     </section>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">離線式、在線互動式、在線式差在哪？</h2>
-        <div class="grid-3">
-          <div class="info-card">
-            <h3>離線式</h3>
-            <p>價格通常較親民，平常走市電，停電時切到電池，適合低負載、低風險設備。</p>
-          </div>
-          <div class="info-card">
-            <h3>在線互動式</h3>
-            <p>多了穩壓能力，是家用電腦、網路設備、NAS、小辦公室最常見的選擇。</p>
-          </div>
-          <div class="info-card">
-            <h3>在線式</h3>
-            <p>平常就透過整流、逆變處理電力，輸出更穩，適合伺服器與關鍵設備。</p>
-          </div>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">離線式、在線互動式、在線式差在哪？</h2>
+        <div class="ecl-card-grid">
+          <div class="ecl-card tinted"><h3>離線式</h3><p>價格通常較親民，平常走市電，停電時切到電池，適合低負載、低風險設備。</p></div>
+          <div class="ecl-card tinted"><h3>在線互動式</h3><p>多了穩壓能力，是家用電腦、網路設備、NAS、小辦公室最常見的選擇。</p></div>
+          <div class="ecl-card tinted"><h3>在線式</h3><p>平常就透過整流、逆變處理電力，輸出更穩，適合伺服器與關鍵設備。</p></div>
         </div>
         <p>如果你的電力環境容易忽高忽低，或設備需要較穩的輸出，在線互動式會比單純離線式更安心。若是小型伺服器、關鍵工作站、通訊設備、醫療或工控周邊等比較不能閃一下就重開的場景，則可以評估在線式 UPS。</p>
         <p>家用與一般辦公環境，最常見的甜蜜點通常是在線互動式 UPS。它的價格不會像在線式那麼高，又能處理常見的電壓偏高、偏低問題。若只是家用路由器、一般電腦，未必一開始就要衝在線式；但如果是伺服器、關鍵監控、營業設備或重要工作站，在線式就有它的價值。</p>
@@ -453,23 +402,14 @@
     </section>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">純正弦波、LCD、可換電池，哪些規格值得看？</h2>
-        <div class="grid-3">
-          <div class="info-card">
-            <h3>純正弦波</h3>
-            <p>純正弦波比較接近市電波形，相容性通常更好，也比較不容易遇到切換後重開、異音或保護觸發。</p>
-          </div>
-          <div class="info-card">
-            <h3>LCD 顯示</h3>
-            <p>LCD 顯示可快速查看負載、電池容量、輸入輸出與運作狀態，現場排查更直覺。</p>
-          </div>
-          <div class="info-card">
-            <h3>可更換電池</h3>
-            <p>可更換電池設計有助於延長 UPS 使用年限，後續維護也更方便。</p>
-          </div>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">純正弦波、LCD、可換電池，哪些規格值得看？</h2>
+        <div class="ecl-card-grid">
+          <div class="ecl-card"><h3>純正弦波</h3><p>純正弦波比較接近市電波形，相容性通常更好，也比較不容易遇到切換後重開、異音或保護觸發。</p></div>
+          <div class="ecl-card"><h3>LCD 顯示</h3><p>LCD 顯示可快速查看負載、電池容量、輸入輸出與運作狀態。</p></div>
+          <div class="ecl-card"><h3>可更換電池</h3><p>可更換電池設計有助於延長 UPS 使用年限，後續維護也更方便。</p></div>
         </div>
-        <div class="media-row">
+        <div class="ecl-img-row">
           <img src="images/lcd-display-ups.jpg" alt="UPS LCD 顯示面板">
           <img src="images/replaceable-battery-ups.jpg" alt="UPS 可更換電池設計">
         </div>
@@ -477,34 +417,23 @@
     </section>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">哪些人最該裝 UPS？</h2>
-        <div class="grid-4">
-          <div class="info-card">
-            <h3>NAS 使用者</h3>
-            <p>避免寫入中斷造成檔案系統錯誤，建議搭配自動關機。</p>
-          </div>
-          <div class="info-card">
-            <h3>遠端工作者</h3>
-            <p>簡報、剪片、程式開發做到一半斷電，損失的是時間。</p>
-          </div>
-          <div class="info-card">
-            <h3>門市與辦公室</h3>
-            <p>POS、路由器、監控主機一停，現場作業就容易卡住。</p>
-          </div>
-          <div class="info-card">
-            <h3>創作者與玩家</h3>
-            <p>高階電腦功耗較高，更要注意 W 數與純正弦波需求。</p>
-          </div>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">哪些人最該裝 UPS？</h2>
+        <div class="ecl-card-grid four">
+          <div class="ecl-card"><h3>NAS 使用者</h3><p>避免寫入中斷造成檔案系統錯誤，建議搭配自動關機。</p></div>
+          <div class="ecl-card"><h3>遠端工作者</h3><p>簡報、剪片、程式開發做到一半斷電，損失的是時間。</p></div>
+          <div class="ecl-card"><h3>門市與辦公室</h3><p>POS、路由器、監控主機一停，現場作業就容易卡住。</p></div>
+          <div class="ecl-card"><h3>創作者與玩家</h3><p>高階電腦功耗較高，更要注意 W 數與純正弦波需求。</p></div>
         </div>
         <p>選購時請先列出會接到 UPS 的設備，估算總瓦數，再保留 20% 到 30% 餘裕。不要把雷射印表機、電暖器、電鍋這種高瞬間功耗設備接到 UPS 電池備援孔，否則很容易過載。UPS 是保護資訊設備，不是拿來撐所有家電。</p>
         <p>安裝時也要注意插座配置。很多 UPS 會分成「電池備援＋突波保護」與「只做突波保護」兩種插孔，真正需要停電時繼續運作的設備，才接到電池備援孔。像 NAS、路由器、數據機、桌機主機、螢幕可以視需求接上；印表機、碎紙機、電暖器這類高瞬間功耗設備，通常不建議接在備援孔。</p>
+        <p>另外，UPS 本身也需要保養。不要把它塞在密閉櫃子、不要長期放在高溫環境、不要讓灰塵堵住散熱孔。電池是消耗品，不是買了就能放十年。若機器開始警示、備援時間明顯變短、電池膨脹或有異味，就要停止使用並安排更換。</p>
       </div>
     </section>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">怎麼配比較實用？三種情境直接看</h2>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">怎麼配比較實用？三種情境直接看</h2>
         <table>
           <thead>
             <tr>
@@ -515,94 +444,79 @@
           </thead>
           <tbody>
             <tr>
-              <td>一般桌機 + 螢幕</td>
+              <td>一般桌機＋螢幕</td>
               <td>看 W 數是否足夠，建議保留容量餘裕；高階電腦優先選純正弦波。</td>
               <td>5 到 15 分鐘，足夠存檔與關機。</td>
             </tr>
             <tr>
-              <td>NAS + 路由器 + 數據機</td>
+              <td>NAS＋路由器＋數據機</td>
               <td>選支援通訊管理的 UPS，讓 NAS 可自動安全關機；低耗電網路設備可延長連線時間。</td>
               <td>15 到 60 分鐘，依設備耗電與 UPS 容量而定。</td>
             </tr>
             <tr>
-              <td>伺服器 / 工作站 / 監控主機</td>
+              <td>伺服器／工作站／監控主機</td>
               <td>重視輸出穩定、純正弦波、管理功能與電池維護；重要場景可考慮在線式。</td>
-              <td>5 到 30 分鐘，重點是安全關機或等待發電復電。</td>
+              <td>5 到 30 分鐘，重點是安全關機或等待發電／復電。</td>
             </tr>
           </tbody>
         </table>
 
-        <h2 class="section-title" style="margin-top:42px;">買 UPS 前，先確認這 5 件事</h2>
+        <h2 class="ecl-title" style="margin-top:36px;">買 UPS 前，先確認這 5 件事</h2>
         <ul>
           <li><strong>設備總瓦數：</strong>把要接的設備加總，UPS 的 W 數不要剛好壓線。</li>
           <li><strong>備援目標：</strong>你是要 5 分鐘關機，還是希望網路設備撐 1 小時？</li>
           <li><strong>輸出波形：</strong>高階電腦、NAS、伺服器、工作站建議選純正弦波。</li>
-          <li><strong>通訊管理：</strong>NAS 或伺服器最好支援 USB 或軟體管理，停電時可自動關機。</li>
+          <li><strong>通訊管理：</strong>NAS 或伺服器最好支援 USB／軟體管理，停電時可自動關機。</li>
           <li><strong>電池維護：</strong>UPS 電池是耗材，備援時間明顯變短就要檢查或更換。</li>
         </ul>
       </div>
     </section>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">良興推薦：三種 UPS 怎麼選？</h2>
-        <div class="product-grid">
-          <a class="product-card" href="https://www.eclife.com.tw/keyboard/moreinfo_180602.htm" target="_blank" rel="noopener">
-            <img src="images/product-cyberpower-1500va.jpg" alt="CyberPower 1500VA UPS 推薦">
-            <div class="product-body">
-              <span class="tag">高階家用 / NAS</span>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">良興推薦：三種 UPS 怎麼選？</h2>
+        <div class="ecl-products">
+          <a class="ecl-product" href="https://www.eclife.com.tw/keyboard/moreinfo_180602.htm" target="_blank" rel="noopener">
+            <img src="images/product-cyberpower-1500va.jpg" alt="CyberPower 1500VA">
+            <div class="ecl-product-body">
+              <span class="ecl-tag">高階家用 / NAS</span>
               <h3>CyberPower 1500VA</h3>
               <p>1500VA / 1000W，純正弦波、在線互動式，適合 NAS、工作站、網路設備與較吃電的桌機環境。想要容量留餘裕，優先看這台。</p>
-              <span class="btn">查看商品</span>
+              <span class="ecl-button">查看商品</span>
             </div>
           </a>
-          <a class="product-card" href="https://www.eclife.com.tw/keyboard/moreinfo_202143.htm" target="_blank" rel="noopener">
-            <img src="images/product-eaton-5e1000lv.jpg" alt="Eaton 5E1000LV UPS 推薦">
-            <div class="product-body">
-              <span class="tag">入門備援</span>
+          <a class="ecl-product" href="https://www.eclife.com.tw/keyboard/moreinfo_202143.htm" target="_blank" rel="noopener">
+            <img src="images/product-eaton-5e1000lv.jpg" alt="Eaton 飛瑞 UPS 5E1000LV">
+            <div class="ecl-product-body">
+              <span class="ecl-tag">入門備援</span>
               <h3>Eaton 飛瑞 UPS 5E1000LV</h3>
               <p>1000VA 在線互動式 UPS，主打成本效益、內建電壓調節、冷啟動與過載保護，適合路由器、數據機、一般辦公電腦。</p>
-              <span class="btn">查看商品</span>
+              <span class="ecl-button">查看商品</span>
             </div>
           </a>
-          <a class="product-card" href="https://www.eclife.com.tw/keyboard/moreinfo_127899.htm" target="_blank" rel="noopener">
-            <img src="images/product-eaton-c1000f.jpg" alt="Eaton C1000F UPS 推薦">
-            <div class="product-body">
-              <span class="tag">穩定優先</span>
+          <a class="ecl-product" href="https://www.eclife.com.tw/keyboard/moreinfo_127899.htm" target="_blank" rel="noopener">
+            <img src="images/product-eaton-c1000f.jpg" alt="Eaton 飛瑞 C1000F">
+            <div class="ecl-product-body">
+              <span class="ecl-tag">穩定優先</span>
               <h3>Eaton 飛瑞 C1000F</h3>
               <p>1KVA / 800W 在線式 UPS，輸出具穩壓與濾除雜訊功能，適合小型 PC 伺服器、辦公室關鍵設備與重視供電品質的環境。</p>
-              <span class="btn">查看商品</span>
+              <span class="ecl-button">查看商品</span>
             </div>
           </a>
         </div>
-        <p class="muted" style="margin-top:18px;">如果你是第一次買 UPS，可以用「設備重要性」來分配預算。只想保護網路不斷線，先看入門在線互動式；家裡有 NAS、工作站、雙螢幕或高階桌機，就把 W 數與純正弦波列入條件；如果是公司關鍵設備，像伺服器、監控主機、門市結帳系統，則要把穩定度、管理功能、維護便利性一起考慮。</p>
+        <p style="margin-top:18px;">如果你是第一次買 UPS，可以用「設備重要性」來分配預算。只想保護網路不斷線，先看入門在線互動式；家裡有 NAS、工作站、雙螢幕或高階桌機，就把 W 數與純正弦波列入條件；如果是公司關鍵設備，像伺服器、監控主機、門市結帳系統，則要把穩定度、管理功能、維護便利性一起考慮。</p>
       </div>
     </section>
 
     <section>
-      <div class="wrap">
-        <h2 class="section-title">FAQ：UPS 常見問題</h2>
-        <div class="faq-list">
-          <div class="faq-card">
-            <h3>Q1：UPS 可以接雷射印表機嗎？</h3>
-            <p>通常不建議。雷射印表機啟動與加熱瞬間耗電很高，容易讓 UPS 過載。UPS 應優先留給電腦、NAS、網路設備、監控主機這類需要安全關機或持續運作的設備。</p>
-          </div>
-          <div class="faq-card">
-            <h3>Q2：1000VA UPS 可以撐多久？</h3>
-            <p>要看設備總瓦數。低耗電路由器、數據機、NAS 可能撐比較久；高耗電桌機或工作站可能只剩十幾分鐘。先算 W，再看原廠備援表最準。</p>
-          </div>
-          <div class="faq-card">
-            <h3>Q3：NAS 一定要接 UPS 嗎？</h3>
-            <p>強烈建議。NAS 最怕斷電時還在寫入資料，搭配支援 USB 通訊或自動關機的 UPS，可以大幅降低資料損毀風險。</p>
-          </div>
-          <div class="faq-card">
-            <h3>Q4：純正弦波 UPS 有必要嗎？</h3>
-            <p>如果是主動式 PFC 電源供應器、高階桌機、工作站或比較敏感的設備，純正弦波會更穩定。一般低功耗設備可依預算與需求選擇。</p>
-          </div>
-          <div class="faq-card">
-            <h3>Q5：UPS 電池多久要換？</h3>
-            <p>常見約 2 到 3 年開始衰退，實際壽命受溫度、放電次數與使用環境影響。若自我測試時間變短、異常警示或電池膨脹，就要盡快更換。</p>
-          </div>
+      <div class="ecl-wrap">
+        <h2 class="ecl-title">FAQ：UPS 常見問題</h2>
+        <div class="ecl-faq">
+          <div class="ecl-faq-item"><h3>Q1：UPS 可以接雷射印表機嗎？</h3><p>通常不建議。雷射印表機啟動與加熱瞬間耗電很高，容易讓 UPS 過載。UPS 應優先留給電腦、NAS、網路設備、監控主機這類需要安全關機或持續運作的設備。</p></div>
+          <div class="ecl-faq-item"><h3>Q2：1000VA UPS 可以撐多久？</h3><p>要看設備總瓦數。低耗電路由器、數據機、NAS 可能撐比較久；高耗電桌機或工作站可能只剩十幾分鐘。先算 W，再看原廠備援表最準。</p></div>
+          <div class="ecl-faq-item"><h3>Q3：NAS 一定要接 UPS 嗎？</h3><p>強烈建議。NAS 最怕斷電時還在寫入資料，搭配支援 USB 通訊或自動關機的 UPS，可以大幅降低資料損毀風險。</p></div>
+          <div class="ecl-faq-item"><h3>Q4：純正弦波 UPS 有必要嗎？</h3><p>如果是主動式 PFC 電源供應器、高階桌機、工作站或比較敏感的設備，純正弦波會更穩定。一般低功耗設備可依預算與需求選擇。</p></div>
+          <div class="ecl-faq-item"><h3>Q5：UPS 電池多久要換？</h3><p>常見約 2 到 3 年開始衰退，實際壽命受溫度、放電次數與使用環境影響。若自我測試時間變短、異常警示或電池膨脹，就要盡快更換。</p></div>
         </div>
       </div>
     </section>
@@ -612,46 +526,11 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "UPS 可以接雷射印表機嗎？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "通常不建議。雷射印表機啟動與加熱瞬間耗電很高，容易讓 UPS 過載。UPS 應優先留給電腦、NAS、網路設備、監控主機這類需要安全關機或持續運作的設備。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "1000VA UPS 可以撐多久？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "要看設備總瓦數。低耗電路由器、數據機、NAS 可能撐比較久；高耗電桌機或工作站可能只剩十幾分鐘。先算 W，再看原廠備援表最準。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "NAS 一定要接 UPS 嗎？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "強烈建議。NAS 最怕斷電時還在寫入資料，搭配支援 USB 通訊或自動關機的 UPS，可以大幅降低資料損毀風險。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "純正弦波 UPS 有必要嗎？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "如果是主動式 PFC 電源供應器、高階桌機、工作站或比較敏感的設備，純正弦波會更穩定。一般低功耗設備可依預算與需求選擇。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "UPS 電池多久要換？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "常見約 2 到 3 年開始衰退，實際壽命受溫度、放電次數與使用環境影響。若自我測試時間變短、異常警示或電池膨脹，就要盡快更換。"
-            }
-          }
+          {"@type":"Question","name":"UPS 可以接雷射印表機嗎？","acceptedAnswer":{"@type":"Answer","text":"通常不建議。雷射印表機啟動與加熱瞬間耗電很高，容易讓 UPS 過載。UPS 應優先留給電腦、NAS、網路設備、監控主機這類需要安全關機或持續運作的設備。"}},
+          {"@type":"Question","name":"1000VA UPS 可以撐多久？","acceptedAnswer":{"@type":"Answer","text":"要看設備總瓦數。低耗電路由器、數據機、NAS 可能撐比較久；高耗電桌機或工作站可能只剩十幾分鐘。先算 W，再看原廠備援表最準。"}},
+          {"@type":"Question","name":"NAS 一定要接 UPS 嗎？","acceptedAnswer":{"@type":"Answer","text":"強烈建議。NAS 最怕斷電時還在寫入資料，搭配支援 USB 通訊或自動關機的 UPS，可以大幅降低資料損毀風險。"}},
+          {"@type":"Question","name":"純正弦波 UPS 有必要嗎？","acceptedAnswer":{"@type":"Answer","text":"如果是主動式 PFC 電源供應器、高階桌機、工作站或比較敏感的設備，純正弦波會更穩定。一般低功耗設備可依預算與需求選擇。"}},
+          {"@type":"Question","name":"UPS 電池多久要換？","acceptedAnswer":{"@type":"Answer","text":"常見約 2 到 3 年開始衰退，實際壽命受溫度、放電次數與使用環境影響。若自我測試時間變短、異常警示或電池膨脹，就要盡快更換。"}}
         ]
       }
     </script>
